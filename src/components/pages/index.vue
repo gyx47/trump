@@ -1,125 +1,131 @@
 <template>
     <div class="page">
-        <div class="header">
-            <div class="title">
-                特朗普支持率研究
-            </div>
-            <div class="title-bottom">
-                <div class="bottom-sidebar"></div>
-            </div>
+      <div class="header">
+        <div class="title">特朗普支持率研究</div>
+        <div class="title-bottom">
+          <div class="bottom-sidebar"></div>
         </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="col-sm-12 col-md-12">
-                    <div class="box-content">
-                        <div class="statistic-box row">
-                            <div class="statistic-item col-md-6" v-for="item in indexData" :key="item.name">
-                                <div class="icon-content">
-                                    <span class="iconfont icon-shuju"></span>
-                                </div>
-                                <div class="text-content">
-                                    <div class="text">
-                                        <span class="counter">
-                                            <ICountUp :delay="delay" :endVal="item.value" :options="options"
-                                                @ready="onReady" />
-                                        </span>
-                                    </div>
-                                    <div class="sub-title">{{ item.name }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12" style="margin-top:20px;">
-                    <h5 style="color:#fff;">各国支持度趋势</h5>
-                    <div ref="countryCharts" style="width:100%; height:300px;"></div>
-                </div>
-                <div class="col-md-12" style="margin-top:20px;">
-                    <h5 style="color:#fff;">平均支持度趋势</h5>
-                    <div ref="avgChart" style="width:100%; height:200px;"></div>
-                </div>
-
-                <div class="col-md-12">
-                    <table class="table border-table darkblue" style="width: 100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td class="th" style="width: 90px;">排名</td>
-                            <td class="th">区域</td>
-                            <td class="th td_right">
-                            </td>
-                            <td class="th td_right">
-                            </td>
-                        </tr>
-                        <tr v-for="(item, index) in datalist" :key="item.id">
-                            <td class="border_bottom border_left_no">{{ index + 1 }}</td>
-                            <td class="border_bottom enable" @click='tdSelect(item)'>
-                                {{ item.area }}
-                            </td>
-                            <td class="td_right">
-                                {{ item.nValue }}
-                            </td>
-                            <td class="td_right">
-                                {{ item.yValue }}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-            </div>
-            <!-- 比如放在左侧 col-md-4 内，表格下方 -->
-            <!-- <div class="col-md-12" style="margin-top: 20px;">
-                <div ref="myLineChart" style="height: 300px; width: 100%;"></div>
-            </div> -->
-            <div ref="countryCharts" style="width:100%; height:400px;"></div>
-            <div ref="avgChart" style="width:100%; height:300px; margin-top:20px;"></div>
-
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="box-content">
-                            <div class="caption">
-                                <div class="main">
-                                    <h2>
-                                        <ICountUp :endVal="totalSales" />
-                                        <small class="number warning">20.11%</small>
-                                    </h2>
-                                </div>
-                                <div>
-                                    <h6>特朗普政策提案类型统计</h6>
-                                </div>
-                            </div>
-
-                            <div class="box-content" style="margin-top: 20px;">
-                                <div ref="policyCategoryChart" style="height: 400px; width: 100%;"></div>
-                            </div>
-
-                            <div class="new-interactive-section"
-                                style="height: 200px; border: 1px dashed #ccc; margin-top: 20px; padding: 10px; color: #fff; text-align:center;">
-                                (其他新的交互界面将在这里展示...)
-                            </div>
-
-                        </div>
+      </div>
+  
+      <div class="row">
+        <!-- 左侧侧栏 -->
+        <div class="col-md-4">
+          <!-- 统计数字 -->
+          <!-- 左侧固定小像 -->
+          <div class="col-md-4 trump-fixed-container">
+                <div class="trump-portrait-container">
+                    <img 
+                        src="@/assets/images/trump2.jpg" 
+                        alt="Donald Trump" 
+                        class="trump-portrait"
+                        @mouseover="showTrumpInfo = true"
+                        @mouseleave="showTrumpInfo = false"
+                    >
+                    <div v-if="showTrumpInfo" class="trump-info-tooltip">
+                        {{ trumpInfo }}
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="box-content" style="margin-top: 20px;">
-                    <div class="caption">
-                    <h4>提案国家支持率分布</h4>
-                    <select v-model="selectedIssue" @change="loadIssueData(selectedIssue)">
-                        <option v-for="num in issueOptions" :key="num" :value="num">提案 {{ num }}</option>
-                    </select>
-                    </div>
-                    <div ref="worldMapChart" style="height: 500px; width: 100%;"></div>
-                </div>
+  
+         
+  
+          <!-- 数据表格 -->
+          <!-- <div class="box-content">
+            <table
+              class="table border-table darkblue mb-0"
+              style="width:100%;"
+              cellpadding="0"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <th style="width:90px;">排名</th>
+                  <th>区域</th>
+                  <th class="text-right">本月</th>
+                  <th class="text-right">上月</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, idx) in datalist" :key="idx">
+                  <td>{{ idx + 1 }}</td>
+                  <td class="enable" @click="tdSelect(item)">{{ item.area }}</td>
+                  <td class="text-right">{{ item.nValue }}</td>
+                  <td class="text-right">{{ item.yValue }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> -->
+        </div>
+  
+        <!-- 右侧主栏 -->
+        <div class="col-md-8">
+          <!-- 饼图区域 -->
+          <div class="box-content mb-4">
+            <div class="caption mb-3">
+              <h6>特朗普政策提案类型统计</h6>
             </div>
+            <div ref="policyCategoryChart" style="width:100%; height:400px;"></div>
+          </div>
+           <!-- 各国支持度趋势 -->
+           <div class="box-content mb-4">
+            <h5 class="caption mb-2" style="color:#fff;">各国支持度趋势</h5>
+            <div ref="countryCharts" style="width:100%; height:300px;"></div>
+          </div>
+  
+          <!-- 平均支持度趋势 -->
+          <div class="box-content mb-4">
+            <h5 class="caption mb-2" style="color:#fff;">平均支持度趋势</h5>
+            <div ref="avgChart" style="width:100%; height:200px;"></div>
+          </div>
+          <!-- 世界热力图选择 -->
+          <div class="box-content mb-4">
+            <div class="caption mb-2 d-flex align-items-center">
+              <h6 class="mb-0 mr-3">提案国家支持率分布</h6>
+              <select
+                v-model="selectedIssue"
+                @change="loadIssueData(selectedIssue)"
+                class="form-control form-control-sm"
+                style="width: auto;"
+              >
+                <option
+                  v-for="num in issueOptions"
+                  :key="num"
+                  :value="num"
+                >
+                  提案 {{ num }}
+                </option>
+              </select>
+            </div>
+            <div ref="worldMapChart" style="width:100%; height:500px;"></div>
+          </div>
+  
+          <!-- 预留交互区 -->
+          <!-- <div class="new-interactive-section">
+            (其他新的交互界面将在这里展示...)
+          </div> -->
+          <div class="word-cloud-container">
+    <h2>关键词词云图</h2>
+
+        <wordcloud
+        :data="defaultWords"
+        nameKey="name"
+        valueKey="value"
+        :color="myColors"
+        :showTooltip="true"
+        :wordClick="wordClickHandler">
+        </wordcloud>
+
+      
+  </div>
         </div>
-        <div class="footer">
-            <div class="bottom-line"></div>
-        </div>
+      </div>
+  
+      <div class="footer">
+        <div class="bottom-line"></div>
+      </div>
     </div>
-</template>
-
+  </template>
+  
 <script>
 import axios from 'axios';
 import ICountUp from 'vue-countup-v2';
@@ -135,7 +141,7 @@ import policy4 from '@/assets/data/TRUMPWORLD-issue-4.json';
 import policy5 from '@/assets/data/TRUMPWORLD-issue-5.json';
 import pres from '@/assets/data/TRUMPWORLD-pres.json';
 import us from '@/assets/data/TRUMPWORLD-us.json';
-
+import wordcloud from "vue-wordcloud";
 // 保留可能通用的辅助函数
 // var Order = "orderID"; // 如果不再需要可以移除
 // var asc = function (x, y) { ... }
@@ -148,6 +154,7 @@ export default {
     name: 'index',
     components: {
         ICountUp,
+        wordcloud,  
         // ECharts // 如果作为组件使用
     },
     data() {
@@ -161,23 +168,53 @@ export default {
                 prefix: '',
                 suffix: ''
             },
-            indexData: [
-                { name: '当前月销售额', value: 2341560 },
-                { name: '对比上月增长', value: 1582 },
-                { name: '总订单数', value: 2320 },
-                { name: '客户数', value: 1560 },
-                { name: '总客户数', value: 1560 }
-            ],
-            totalSales: 33710896.94,
-            datalist: [
-                { ranking: 1, area: "广东", nValue: 1758000, yValue: 214589 },
-                { ranking: 1, area: "汕头", nValue: 175180, yValue: 145389 },
-                { ranking: 1, area: "潮汕", nValue: 174580, yValue: 142589 }
-            ],
+           
+            myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
+        defaultWords: [{ name: 'poll', value: 302 },
+  { name: 'polls', value: 109 },
+  { name: 'lead', value: 54 },
+  { name: 'cruz', value: 42 },
+  { name: 'iowa', value: 42 },
+  { name: 'big', value: 41 },
+  { name: 'gop', value: 39 },
+  { name: 'carson', value: 38 },
+  { name: 'debate', value: 36 },
+  { name: 'makeamericagreatagain', value: 33 },
+  { name: 'rubio', value: 33 },
+  { name: 'national', value: 31 },
+  { name: 'leading', value: 27 },
+  { name: 'hillary', value: 26 },
+  { name: 'bush', value: 26 },
+  { name: 'america', value: 21 },
+  { name: 'shows', value: 21 },
+  { name: 'wow', value: 21 },
+  { name: 'win', value: 18 },
+  { name: 'reuters', value: 18 },
+  { name: 'clinton', value: 16 },
+  { name: 'fox', value: 12 },
+  { name: 'race', value: 12 },
+  { name: 'ahead', value: 9 },
+  { name: 'voters', value: 8 },
+  { name: 'election', value: 6 },
+  { name: 'candidate', value: 6 },
+  { name: 'pollster', value: 4 },
+  { name: 'nominee', value: 4 },
+  { name: 'trump', value: 2 }
+        
+      
+],
+
             // 新图表所需数据
             policyCategoryStats: [],
             selectedIssue: 1, // 当前选择的提案编号
             issueOptions: [1, 2, 3, 4, 5], // 提案选项
+            proposalLabels: { // <--- 新增这个对象
+        1: "撤销对国际气候变化协议的支持",
+        2: "在美国和墨西哥边境修建隔离墙",
+        3: "撤回美国对伊朗核武器协议的支持",
+        4: "撤回美国对主要贸易协议的支持",
+        5: "对来自某些穆斯林为主国家的入境人员实行更严格的限制"
+      },
             worldMapData: [], // 用于保存热力图数据
             chartInstance: null, // 地图图表实例
             years: [],
@@ -186,9 +223,19 @@ export default {
             seriesNat: [],        // 对国家支持度的多国折线数据
             avgPres: [],          // 全体平均——总统
             avgNat: [],           // 全体平均——国家
+            // trump小像
+            showTrumpInfo: false,
+            trumpInfo: "特朗普是美国第45任总统，曾在2017年至2021年任职。他的政策主张包括减税、移民改革和贸易保护主义等。",
         };
     },
     methods: {
+         // 在 mounted 或 processData 里做一次转换：
+    //   prepareWordCloud() {
+    //     this.words = this.rawWords.map(([text, value]) => ({ text, value }));
+    //   },
+    wordClickHandler(name, value, vm) {
+      console.log('wordClickHandler', name, value, vm);
+    },
         onReady: function (instance, CountUp) {
             return;
         },
@@ -229,7 +276,7 @@ export default {
             const policy5count = {};
             policyDataJson.forEach(item => {
                 if (item.category) {
-                    categoryCounts[item.category] = categoryCounts[item.category];
+                    categoryCounts[item.category] = (categoryCounts[item.category]|| 0) + 1;
                 }
             });
             // console.log("政策分类数据:", policyDataJson);
@@ -498,7 +545,7 @@ export default {
                         type: 'line',
                         data: this.avgNat,
                         smooth: true,
-                        lineStyle: { width: 2, type: 'dashed' }
+                        lineStyle: { width: 2, type: 'dashed' ,color:'blue'}
                     }
                 ]
             });
@@ -543,28 +590,7 @@ export default {
 
   this.countryChart = countryChart;
 
-  // —— 4. 平均折线（保持不变） —— 
-  const avgChart = echarts.init(this.$refs.avgChart);
-  avgChart.setOption({
-    title: {
-      text: '全体平均支持度趋势',
-      left: 'center',
-      textStyle: { color: '#fff' }
-    },
-    tooltip: { trigger: 'axis' },
-    legend: {
-      data: ['平均——总统','平均——国家'],
-      top: 30,
-      textStyle: { color: '#9AA8D4' }
-    },
-    grid: { left:'3%', right:'4%', bottom:'3%', containLabel:true },
-    xAxis: { type:'category', data:this.years, axisLabel:{ color:'#9AA8D4' } },
-    yAxis: { type:'value', axisLabel:{ color:'#9AA8D4' } },
-    series: [
-      { name:'平均——总统', type:'line', data:this.avgPres, smooth:true },
-      { name:'平均——国家', type:'line', data:this.avgNat, smooth:true, lineStyle:{ type:'dashed' }}
-    ]
-  });
+
   window.addEventListener('resize', avgChart.resize);
   this.avgChart = avgChart;
 },
@@ -573,10 +599,10 @@ export default {
         if (!chartDom) return;
 
         const myChart = echarts.init(chartDom);
-
+        const selectedIssueLabel = this.proposalLabels[this.selectedIssue] || `提案 ${this.selectedIssue}`; // 后备文本
         const option = {
             title: {
-            text: `特朗普提案 ${this.selectedIssue} - 各国净支持率分布`,
+            text: `特朗普提案 ${selectedIssueLabel} - 各国净支持率分布`,
             left: 'center',
             textStyle: { color: '#fff' }
             },
@@ -587,17 +613,31 @@ export default {
             }
             },
             visualMap: {
-                min: -100,
-                max: 100,
-                inRange: {
-                    color: ['#fff5eb', '#ff6600']
-                },
-                text: ['高支持率', '低支持率'],
-                calculable: true,
-                orient: 'horizontal',
-                bottom: 20,
-                left: 'center'
-            },
+  type: 'continuous',
+  min: -89,
+  max:  41,
+  calculable: true,
+  orient: 'horizontal',
+  bottom: 20,
+  left: 'center',
+  text: ['高支持率','低支持率'],
+  inRange: {
+    color: [
+      '#ffffff',  // min ≈ -89
+      '#fee6ce',  // ≈ -65（20%分位）
+      '#fdd0a2',  // ≈ -47（40%分位）
+      '#fdae6b',  // ≈ -30（60%分位）
+      '#fd8d3c',  // ≈ -12（80%分位）
+      '#ef3b2c',  // 中高端
+      '#cb181d',  // 更高
+      '#a50f15'   // max = +41
+    ]
+  }
+},
+
+
+  
+
             mapType: 'world',
             roam: true,
             itemStyle: {
@@ -631,12 +671,14 @@ export default {
         }
     },
     mounted() {
+        // this.prepareWordCloud();
         console.log("Vue component mounted. Preparing new policy category chart.");
         this.processPolicyCategoryData();
         this.processData();
         this.drawPolicyCategoryChart();
         this.drawCharts();
         this.loadIssueData(this.selectedIssue);
+    
     },
     beforeDestroy() {
         // 清理 ECharts 实例和事件监听器
@@ -804,5 +846,85 @@ small.number {
 
 .warning {
     color: red;
+}
+/* 新增特朗普小像样式 */
+
+.trump-fixed-container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 33.333333%; /* 保持col-md-4的宽度 */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    pointer-events: none; /* 允许点击穿透到下方内容 */
+}
+
+.trump-portrait-container {
+    pointer-events: auto; /* 恢复小像区域的点击事件 */
+    max-width: 90%;
+    padding: 20px;
+}
+
+.scrollable-content {
+    margin-left: 33.333333%; /* 为固定的小像留出空间 */
+    width: 66.666667%; /* col-md-8的宽度 */
+}
+
+/* 响应式调整 - 
+当屏幕宽度小于992px时，.trump-fixed-container 会变为普通流式布局，不再固定，宽度100%
+*/
+@media (max-width: 992px) {
+    .trump-fixed-container {
+        position: static;
+        width: 100%;
+        height: auto;
+        transform: none;
+    }
+    
+    .scrollable-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.trump-portrait {
+    max-width: 100%;
+    max-height: 400px;
+    border: 3px solid rgba(130, 157, 248, 0.705);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.trump-portrait:hover {
+    transform: scale(1.05);
+}
+
+.trump-info-tooltip {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(25, 47, 89, 0.9);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 80%;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+.word-cloud-container {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>
