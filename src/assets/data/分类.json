@@ -1,0 +1,642 @@
+[
+    {
+        "question": "Pardoning people convicted of violent crimes related to the Jan. 6, 2021, Capitol riot",
+        "category": "Crime",
+        "yes": "14",
+        "no": "83",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-69"
+    },
+    {
+        "question": "Ending requirements that government employees report gifts or investments",
+        "category": "Executive",
+        "yes": "20",
+        "no": "77",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-57"
+    },
+    {
+        "question": "Tax employee-provided benefits, such as health coverage",
+        "category": "Health care",
+        "yes": "14",
+        "no": "68",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-54"
+    },
+    {
+        "question": "Abolishing the Occupational Safety and Health Administration (OSHA)",
+        "category": "Labor",
+        "yes": "16",
+        "no": "67",
+        "pollster": "YouGov",
+        "dates": "Feb. 9 - 11",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_Z51qCJt.pdf",
+        "net": "-51"
+    },
+    {
+        "question": "Do you approve or disapprove of Donald Trump pardoning people who were convicted of violent crimes related to the events at the U.S. Capitol on January 6, 2021?",
+        "category": "Crime",
+        "yes": "25",
+        "no": "74",
+        "pollster": "Pew Research Center",
+        "dates": "Jan. 27 - Feb. 2",
+        "link": "https://www.pewresearch.org/wp-content/uploads/sites/20/2025/02/PP_2024.7.2_views-of-trump_topline.pdf",
+        "net": "-49"
+    },
+    {
+        "question": "Ending a free online tax filing system run by the IRS",
+        "category": "IRS",
+        "yes": "15",
+        "no": "63",
+        "pollster": "YouGov",
+        "dates": "Feb. 9 - 11",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_Z51qCJt.pdf",
+        "net": "-48"
+    },
+    {
+        "question": " Renaming the ''Gulf of Mexico'' to the ''Gulf of America''",
+        "category": "Other",
+        "yes": "25",
+        "no": "70",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-45"
+    },
+    {
+        "question": "Deport undocumented immigrant who arrived in the U.S. as children",
+        "category": "Immigration",
+        "yes": "26",
+        "no": "70",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-44"
+    },
+    {
+        "question": "A U.S. government takeover of Gaza that invovles resettling Palestinians",
+        "category": "Foreign policy",
+        "yes": "25",
+        "no": "68",
+        "pollster": "Ipsos",
+        "dates": "Feb. 13 - 18",
+        "link": "https://pro.x.com/PollTracker2024/status/1893650974121558399/photo/1",
+        "net": "-43"
+    },
+    {
+        "question": "Blocking federal health agencies from communicating with the public without approval from a Trump appointee",
+        "category": "Executive",
+        "yes": "25",
+        "no": "68",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-43"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Gaza",
+        "category": "Foreign policy",
+        "yes": "16",
+        "no": "59",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-43"
+    },
+    {
+        "question": "President Trump’s executive order instructing the Secretary of the Interior to rename the Gulf of Mexico as the Gulf of America",
+        "category": "Other",
+        "yes": "29",
+        "no": "71",
+        "pollster": "Marquette University Law School",
+        "dates": "Jan. 27 - Feb. 5",
+        "link": "https://law.marquette.edu/poll/wp-content/uploads/2025/02/MLSPSC24Toplines_NationalIssues.html",
+        "net": "-42"
+    },
+    {
+        "question": "President Trump's proposal for the United States to take control of Gaza?",
+        "category": "Foreign policy",
+        "yes": "22",
+        "no": "62",
+        "pollster": "Quinnipiac University",
+        "dates": "Feb. 13 - 17",
+        "link": "https://poll.qu.edu/images/polling/us/us02192025_urxu99.pdf",
+        "net": "-40"
+    },
+    {
+        "question": "The U.S. owning the gaza strip",
+        "category": "Foreign policy",
+        "yes": "18",
+        "no": "58",
+        "pollster": "Emerson College",
+        "dates": "Feb. 15 - 17",
+        "link": "https://emersoncollegepolling.com/february-2025-national-poll-trump-presidential-approval-at-48-musk-doge-job-approval-at-41/",
+        "net": "-40"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Canada",
+        "category": "Foreign policy",
+        "yes": "20",
+        "no": "59",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-39"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Gaza",
+        "category": "Foreign policy",
+        "yes": "23",
+        "no": "62",
+        "pollster": "Data for Progress",
+        "dates": "Feb. 8 - 9",
+        "link": "https://www.dataforprogress.org/blog/2025/2/12/voters-strongly-oppose-trumps-plan-to-take-over-and-own-gaza",
+        "net": "-39"
+    },
+    {
+        "question": "Dropping federal corruption charges against New York City Mayor Eric Adams",
+        "category": "Crime",
+        "yes": "16",
+        "no": "54",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-38"
+    },
+    {
+        "question": "Pardoning former Illinois Governor Rod Blagojevich for corruption",
+        "category": "Crime",
+        "yes": "17",
+        "no": "55",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-38"
+    },
+    {
+        "question": "Deport undocumented immigrant who have lived in the U.S. for more than 10 years",
+        "category": "Immigration",
+        "yes": "30",
+        "no": "67",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-37"
+    },
+    {
+        "question": "Deport undocumented immigrant who are parents of U.S. citizens by birth",
+        "category": "Immigration",
+        "yes": "30",
+        "no": "66",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-36"
+    },
+    {
+        "question": "Cutting funding for the National Institutes of Health (NIH)",
+        "category": "Health care",
+        "yes": "24",
+        "no": "59",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-35"
+    },
+    {
+        "question": "e the U.S. taking ownership of Gaza?",
+        "category": "Foreign policy",
+        "yes": "19",
+        "no": "54",
+        "pollster": "YouGov",
+        "dates": "Feb. 9 - 11",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_Z51qCJt.pdf",
+        "net": "-35"
+    },
+    {
+        "question": "Placing fewer restrictions around how AI systems are developed and used",
+        "category": "AI",
+        "yes": "30",
+        "no": "65",
+        "pollster": "Ipsos",
+        "dates": "Jan. 31 - Feb. 2",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-02/Reuters%20Ipsos%20Poll%20on%20Executive%20Orders%20February%202025.pdf",
+        "net": "-35"
+    },
+    {
+        "question": "Renaming the Gulf of Mexico to the Gulf of America",
+        "category": "Other",
+        "yes": "30",
+        "no": "65",
+        "pollster": "Ipsos",
+        "dates": "Feb. 13 - 18",
+        "link": "https://pro.x.com/PollTracker2024/status/1893650974121558399/photo/1",
+        "net": "-35"
+    },
+    {
+        "question": "Shutting down the Spanish-language version of the White House website",
+        "category": "Executive",
+        "yes": "28",
+        "no": "62",
+        "pollster": "Data for Progress",
+        "dates": "Feb. 8 - 12",
+        "link": "https://www.dataforprogress.org/blog/2025/2/12/voters-strongly-oppose-trumps-plan-to-take-over-and-own-gaza",
+        "net": "-34"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Canada",
+        "category": "Foreign policy",
+        "yes": "27",
+        "no": "61",
+        "pollster": "Data for Progress",
+        "dates": "Feb. 8 - 9",
+        "link": "https://www.dataforprogress.org/blog/2025/2/12/voters-strongly-oppose-trumps-plan-to-take-over-and-own-gaza",
+        "net": "-34"
+    },
+    {
+        "question": "Imposing a 25 percent tariff on most products from Canada",
+        "category": "Trade",
+        "yes": "31",
+        "no": "64",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-33"
+    },
+    {
+        "question": "Removing all mentions of \"climate change\" from the U.S. Department of Agriculture (USDA) website",
+        "category": "Executive",
+        "yes": "29",
+        "no": "62",
+        "pollster": "Data for Progress",
+        "dates": "Feb. 8 - 10",
+        "link": "https://www.dataforprogress.org/blog/2025/2/12/voters-strongly-oppose-trumps-plan-to-take-over-and-own-gaza",
+        "net": "-33"
+    },
+    {
+        "question": "Drop federal corruption charges against New York City Mayor Eric Adams",
+        "category": "Crime",
+        "yes": "18",
+        "no": "50",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-32"
+    },
+    {
+        "question": "Blocking spending that Congress has approved for all government grants, including those for Medicare, food banks, and loans for farmers.",
+        "category": "DOGE/Funding",
+        "yes": "30",
+        "no": "61",
+        "pollster": "Clarity Campaign Labs",
+        "dates": "Jan. 31 -  Feb. 6",
+        "link": "https://static1.squarespace.com/static/61ae8d5e55be5c7314b4c83a/t/67aa57a7976e415c4d212706/1739216809584/Clarity+Omnibus+Overview+-+Jan_Feb+2025.pdf",
+        "net": "-31"
+    },
+    {
+        "question": "President Trump’s pardon of about 1,500 people convicted in the January 6, 2021 violence at the U.S. Capito",
+        "category": "Crime",
+        "yes": "34",
+        "no": "65",
+        "pollster": "Marquette University Law School",
+        "dates": "Jan. 27 - Feb. 5",
+        "link": "https://law.marquette.edu/poll/wp-content/uploads/2025/02/MLSPSC24Toplines_NationalIssues.html",
+        "net": "-31"
+    },
+    {
+        "question": "Abolishing the U.S. Department of Education",
+        "category": "Executive",
+        "yes": "28",
+        "no": "58",
+        "pollster": "YouGov",
+        "dates": "Feb. 9 - 11",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_Z51qCJt.pdf",
+        "net": "-30"
+    },
+    {
+        "question": "Trump signed an executive order making it harder for Medicare to negotiate for lower prescription drug costs",
+        "category": "Health care",
+        "yes": "20",
+        "no": "50",
+        "pollster": "Navigator Research",
+        "dates": "Jan. 30 - Feb. 3",
+        "link": "https://navigatorresearch.org/wp-content/uploads/2025/02/Navigator-Update-02.10.2025.pdf",
+        "net": "-30"
+    },
+    {
+        "question": "Adding Greenland as a U.S. state",
+        "category": "Foreign policy",
+        "yes": "26",
+        "no": "55",
+        "pollster": "Emerson College",
+        "dates": "Feb. 15 - 17",
+        "link": "https://emersoncollegepolling.com/february-2025-national-poll-trump-presidential-approval-at-48-musk-doge-job-approval-at-41/",
+        "net": "-29"
+    },
+    {
+        "question": "Dissolving the U.S. Department of Education",
+        "category": "Education",
+        "yes": "28",
+        "no": "56",
+        "pollster": "YouGov",
+        "dates": "Feb. 2 - Feb. 4",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econTabReport_FOXP71G.pdf",
+        "net": "-28"
+    },
+    {
+        "question": "Pardoning January 6th protestors",
+        "category": "Crime",
+        "yes": "34",
+        "no": "62",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-28"
+    },
+    {
+        "question": "Temporarily freezing federal funding for government grants and services in the U.S.",
+        "category": "DOGE/Funding",
+        "yes": "34",
+        "no": "62",
+        "pollster": "Ipsos",
+        "dates": "Jan. 31 - Feb. 2",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-02/Reuters%20Ipsos%20Poll%20on%20Executive%20Orders%20February%202025.pdf",
+        "net": "-28"
+    },
+    {
+        "question": "Eliminating the Consumer Financial Protection Bureau (CFPB) Creating an",
+        "category": "Executive",
+        "yes": "21",
+        "no": "48",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-27"
+    },
+    {
+        "question": "e proposed new rules that would abolish unions and union contracts for American workers who are employed by the federal government",
+        "category": "Executive",
+        "yes": "32",
+        "no": "57",
+        "pollster": "Data for Progress",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.dataforprogress.org/blog/2025/1/29/after-week-1-voters-have-a-slightly-favorable-view-of-trump-but-oppose-many-of-his-executive-orders",
+        "net": "-25"
+    },
+    {
+        "question": "Imposing a 25% tariff on goods imported from Canada",
+        "category": "Trade",
+        "yes": "28",
+        "no": "53",
+        "pollster": "YouGov",
+        "dates": "Feb. 12 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Tariffs_and_Trade_poll_results.pdf",
+        "net": "-25"
+    },
+    {
+        "question": "Renaming the Gulf of Mexico to the Gulf of America",
+        "category": "Other",
+        "yes": "29",
+        "no": "54",
+        "pollster": "YouGov",
+        "dates": "Feb. 2 - Feb. 4",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econTabReport_FOXP71G.pdf",
+        "net": "-25"
+    },
+    {
+        "question": "Withdrawing from the United Nations Human Rights Council (UNHRC)",
+        "category": "Foreign policy",
+        "yes": "26",
+        "no": "51",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-25"
+    },
+    {
+        "question": "Imposing a 25 percent tariff on most products from Mexico",
+        "category": "Trade",
+        "yes": "35",
+        "no": "59",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-24"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Greenland",
+        "category": "Foreign policy",
+        "yes": "26",
+        "no": "50",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-24"
+    },
+    {
+        "question": "the U.S. placing new tariffs on goods imported from Canada",
+        "category": "Trade",
+        "yes": "38",
+        "no": "62",
+        "pollster": "YouGov/CBS News",
+        "dates": "Feb. 5 - 7",
+        "link": "https://www.scribd.com/document/825874200/cbsnews-20250209-1#fullscreen&from_embed",
+        "net": "-24"
+    },
+    {
+        "question": "Cutting funding for National Public Radio (NPR) and the Public Broadcasting Service (PBS)",
+        "category": "Other",
+        "yes": "28",
+        "no": "51",
+        "pollster": "YouGov",
+        "dates": "Feb. 11 - 14",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/Policy_Support_poll_results.pdf",
+        "net": "-23"
+    },
+    {
+        "question": "e removing all Palestinians from Gaza?",
+        "category": "Foreign policy",
+        "yes": "21",
+        "no": "44",
+        "pollster": "YouGov",
+        "dates": "Feb. 9 - 11",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_Z51qCJt.pdf",
+        "net": "-23"
+    },
+    {
+        "question": "Ending birthright citizenship, which makes anyone born in the U.S. a citizen ",
+        "category": "Immigration",
+        "yes": "31",
+        "no": "54",
+        "pollster": "Ipsos/NPR",
+        "dates": "Feb. 7 - 10",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-02/NPR%20Immigration%20Topline%20February%202025.pdf",
+        "net": "-23"
+    },
+    {
+        "question": "Ending birthright citizenship, which makes anyone born in the U.S. a citizen ",
+        "category": "Immigration",
+        "yes": "36",
+        "no": "59",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-23"
+    },
+    {
+        "question": "New tariffs, or taxes, on imported goods from Canada",
+        "category": "Trade",
+        "yes": "37",
+        "no": "60",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-23"
+    },
+    {
+        "question": "U.S. taking over control of Gaza",
+        "category": "Foreign policy",
+        "yes": "29",
+        "no": "52",
+        "pollster": "Morning Consult",
+        "dates": "Feb. 7 - 9",
+        "link": "https://pro.morningconsult.com/analysis/congress-reconciliation-tax-cuts-polling",
+        "net": "-23"
+    },
+    {
+        "question": "Donald Trump’s proposal that the U.S. take over rebuilding the Gaza Strip",
+        "category": "Foreign policy",
+        "yes": "29",
+        "no": "51",
+        "pollster": "Echelon Insights",
+        "dates": "Feb. 10 - 21",
+        "link": "https://echelonin.wpenginepowered.com/wp-content/uploads/February-2025-Voter-Omnibus-Topline-External.pdf",
+        "net": "-22"
+    },
+    {
+        "question": "Ending federal efforts to hire women or racial minorities",
+        "category": "Executive",
+        "yes": "37",
+        "no": "59",
+        "pollster": "Ipsos",
+        "dates": "Jan. 24 - 26",
+        "link": "https://www.ipsos.com/sites/default/files/ct/news/documents/2025-01/Ipsos%20Poll%20on%20New%20Executive%20Orders%20Topline%20January%202025.pdf",
+        "net": "-22"
+    },
+    {
+        "question": "Renaming the Gulf of Mexico to the Gulf of America",
+        "category": "Other",
+        "yes": "30",
+        "no": "52",
+        "pollster": "YouGov/The Economist",
+        "dates": "Feb. 16 - 18",
+        "link": "https://d3nkl3psvxxpe9.cloudfront.net/documents/econtoplines_KfNmvTk.pdf",
+        "net": "-22"
+    },
+    {
+        "question": "Spending U.S. government money to rebuild Gaza",
+        "category": "Foreign policy",
+        "yes": "30",
+        "no": "52",
+        "pollster": "Morning Consult",
+        "dates": "Feb. 7 - 9",
+        "link": "https://pro.morningconsult.com/analysis/congress-reconciliation-tax-cuts-polling",
+        "net": "-22"
+    },
+    {
+        "question": "Ending birthright citizenship for children of foreign workers or students with temporary visas?",
+        "category": "Immigration",
+        "yes": "37",
+        "no": "58",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-21"
+    },
+    {
+        "question": "federal legislation to establish a strategic bitcoin reserve in the United States?",
+        "category": "Treasury/Monetary",
+        "yes": "17",
+        "no": "38",
+        "pollster": "Cygnal",
+        "dates": "Feb. 4 - 5",
+        "link": "https://www.cygn.al/wp-content/uploads/2025/02/22874-Cygnal-National-NVT-Feb25-Deck-Public.pdf",
+        "net": "-21"
+    },
+    {
+        "question": "Making it easier for presidents to fire longtime federal workers",
+        "category": "Executive",
+        "yes": "37",
+        "no": "58",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-21"
+    },
+    {
+        "question": "Shutting down the U.S. agency that provides humanitarian aid in low-income countries",
+        "category": "Foreign policy",
+        "yes": "38",
+        "no": "59",
+        "pollster": "Ipsos/Washington Post",
+        "dates": "Feb. 13 - 18 ",
+        "link": "https://docs.google.com/spreadsheets/d/1kdcXmy8B1zajwnb6KUbZ-KxUixlTPoTY3Bg_Bfld0h0/edit?gid=0#gid=0",
+        "net": "-21"
+    },
+    {
+        "question": "Support the U.S. seeking ownership of Greenland",
+        "category": "Foreign policy",
+        "yes": "32",
+        "no": "53",
+        "pollster": "Data for Progress",
+        "dates": "Feb. 8 - 9",
+        "link": "https://www.dataforprogress.org/blog/2025/2/12/voters-strongly-oppose-trumps-plan-to-take-over-and-own-gaza",
+        "net": "-21"
+    },
+    {
+        "question": "Trump is instating a gag order for doctors and researchers working at the CDC and NIH so they can't talk about research or public health threats",
+        "category": "Health care",
+        "yes": "25",
+        "no": "46",
+        "pollster": "Navigator Research",
+        "dates": "Jan. 30 - Feb. 3",
+        "link": "https://navigatorresearch.org/wp-content/uploads/2025/02/Navigator-Update-02.10.2025.pdf",
+        "net": "-21"
+    },
+    {
+        "question": "Donald Trump’s executive order renaming the Gulf of Mexico to the Gulf of America?",
+        "category": "Other",
+        "yes": "28",
+        "no": "48",
+        "pollster": "Cygnal",
+        "dates": "Feb. 4 - 5",
+        "link": "https://www.cygn.al/wp-content/uploads/2025/02/22874-Cygnal-National-NVT-Feb25-Deck-Public.pdf",
+        "net": "-20"
+    },
+    {
+        "question": "Forcing Denmark to sell Greenland to the United States.",
+        "category": "Foreign policy",
+        "yes": "30",
+        "no": "50",
+        "pollster": "Clarity Campaign Labs",
+        "dates": "Jan. 31 -  Feb. 6",
+        "link": "https://static1.squarespace.com/static/61ae8d5e55be5c7314b4c83a/t/67aa57a7976e415c4d212706/1739216809584/Clarity+Omnibus+Overview+-+Jan_Feb+2025.pdf",
+        "net": "-20"
+    },
+    {
+        "question": "the U.S. placing new tariffs on goods imported from Europe",
+        "category": "Trade",
+        "yes": "40",
+        "no": "60",
+        "pollster": "YouGov/CBS News",
+        "dates": "Feb. 5 - 7",
+        "link": "https://www.scribd.com/document/825874200/cbsnews-20250209-1#fullscreen&from_embed",
+        "net": "-20"
+    }
+]

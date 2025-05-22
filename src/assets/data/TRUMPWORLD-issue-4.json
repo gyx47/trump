@@ -1,0 +1,261 @@
+[
+    {
+        "country": "Canada",
+        "net_approval": "-63",
+        "Approve": "15",
+        "Disapprove": "78",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "France",
+        "net_approval": "-68",
+        "Approve": "15",
+        "Disapprove": "83",
+        "DK/Refused": "2"
+    },
+    {
+        "country": "Germany",
+        "net_approval": "-68",
+        "Approve": "13",
+        "Disapprove": "81",
+        "DK/Refused": "5"
+    },
+    {
+        "country": "Greece",
+        "net_approval": "-54",
+        "Approve": "17",
+        "Disapprove": "71",
+        "DK/Refused": "13"
+    },
+    {
+        "country": "Hungary",
+        "net_approval": "-45",
+        "Approve": "18",
+        "Disapprove": "63",
+        "DK/Refused": "19"
+    },
+    {
+        "country": "Italy",
+        "net_approval": "-48",
+        "Approve": "18",
+        "Disapprove": "66",
+        "DK/Refused": "17"
+    },
+    {
+        "country": "Netherlands",
+        "net_approval": "-78",
+        "Approve": "10",
+        "Disapprove": "88",
+        "DK/Refused": "3"
+    },
+    {
+        "country": "Poland",
+        "net_approval": "-45",
+        "Approve": "14",
+        "Disapprove": "59",
+        "DK/Refused": "27"
+    },
+    {
+        "country": "Spain",
+        "net_approval": "-75",
+        "Approve": "10",
+        "Disapprove": "85",
+        "DK/Refused": "5"
+    },
+    {
+        "country": "Sweden",
+        "net_approval": "-85",
+        "Approve": "5",
+        "Disapprove": "90",
+        "DK/Refused": "5"
+    },
+    {
+        "country": "United Kingdom",
+        "net_approval": "-55",
+        "Approve": "17",
+        "Disapprove": "72",
+        "DK/Refused": "11"
+    },
+    {
+        "country": "Russia",
+        "net_approval": "-21",
+        "Approve": "28",
+        "Disapprove": "49",
+        "DK/Refused": "23"
+    },
+    {
+        "country": "Australia",
+        "net_approval": "-54",
+        "Approve": "19",
+        "Disapprove": "73",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "India",
+        "net_approval": "-4",
+        "Approve": "24",
+        "Disapprove": "28",
+        "DK/Refused": "48"
+    },
+    {
+        "country": "Indonesia",
+        "net_approval": "-11",
+        "Approve": "34",
+        "Disapprove": "45",
+        "DK/Refused": "21"
+    },
+    {
+        "country": "Japan",
+        "net_approval": "-50",
+        "Approve": "16",
+        "Disapprove": "66",
+        "DK/Refused": "18"
+    },
+    {
+        "country": "Philippines",
+        "net_approval": "-50",
+        "Approve": "22",
+        "Disapprove": "72",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "South Korea",
+        "net_approval": "-68",
+        "Approve": "12",
+        "Disapprove": "80",
+        "DK/Refused": "8"
+    },
+    {
+        "country": "Vietnam",
+        "net_approval": "-35",
+        "Approve": "26",
+        "Disapprove": "61",
+        "DK/Refused": "13"
+    },
+    {
+        "country": "Israel",
+        "net_approval": "-34",
+        "Approve": "24",
+        "Disapprove": "58",
+        "DK/Refused": "18"
+    },
+    {
+        "country": "Jordan",
+        "net_approval": "-71",
+        "Approve": "12",
+        "Disapprove": "83",
+        "DK/Refused": "5"
+    },
+    {
+        "country": "Lebanon",
+        "net_approval": "-58",
+        "Approve": "16",
+        "Disapprove": "74",
+        "DK/Refused": "10"
+    },
+    {
+        "country": "Tunisia",
+        "net_approval": "-40",
+        "Approve": "20",
+        "Disapprove": "60",
+        "DK/Refused": "20"
+    },
+    {
+        "country": "Turkey",
+        "net_approval": "-30",
+        "Approve": "20",
+        "Disapprove": "50",
+        "DK/Refused": "30"
+    },
+    {
+        "country": "Ghana",
+        "net_approval": "-52",
+        "Approve": "20",
+        "Disapprove": "72",
+        "DK/Refused": "8"
+    },
+    {
+        "country": "Kenya",
+        "net_approval": "-33",
+        "Approve": "32",
+        "Disapprove": "65",
+        "DK/Refused": "3"
+    },
+    {
+        "country": "Nigeria",
+        "net_approval": "-32",
+        "Approve": "32",
+        "Disapprove": "64",
+        "DK/Refused": "4"
+    },
+    {
+        "country": "Senegal",
+        "net_approval": "-64",
+        "Approve": "14",
+        "Disapprove": "78",
+        "DK/Refused": "8"
+    },
+    {
+        "country": "South Africa",
+        "net_approval": "-15",
+        "Approve": "35",
+        "Disapprove": "50",
+        "DK/Refused": "15"
+    },
+    {
+        "country": "Tanzania",
+        "net_approval": "-33",
+        "Approve": "30",
+        "Disapprove": "63",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "Argentina",
+        "net_approval": "-51",
+        "Approve": "18",
+        "Disapprove": "69",
+        "DK/Refused": "14"
+    },
+    {
+        "country": "Brazil",
+        "net_approval": "-54",
+        "Approve": "17",
+        "Disapprove": "71",
+        "DK/Refused": "12"
+    },
+    {
+        "country": "Chile",
+        "net_approval": "-70",
+        "Approve": "11",
+        "Disapprove": "81",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "Colombia",
+        "net_approval": "-55",
+        "Approve": "19",
+        "Disapprove": "74",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "Mexico",
+        "net_approval": "-66",
+        "Approve": "14",
+        "Disapprove": "80",
+        "DK/Refused": "6"
+    },
+    {
+        "country": "Peru",
+        "net_approval": "-51",
+        "Approve": "21",
+        "Disapprove": "72",
+        "DK/Refused": "7"
+    },
+    {
+        "country": "Venezuela",
+        "net_approval": "-54",
+        "Approve": "19",
+        "Disapprove": "73",
+        "DK/Refused": "8"
+    }
+]
