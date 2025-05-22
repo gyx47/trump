@@ -124,7 +124,7 @@
 import axios from 'axios';
 import ICountUp from 'vue-countup-v2';
 import * as echarts from 'echarts'; // 确保已安装并引入 ECharts
-import 'echarts/map/js/world.js';
+import 'echarts/map/js/world';
 
 // 导入政策分类数据
 import policyDataJson from '@/assets/data/分类.json';
@@ -303,6 +303,35 @@ export default {
 
 
         },
+        loadIssueData(issueNumber) {
+            let data = [];
+            switch (issueNumber) {
+            case 1:
+                data = this.formatDataForWorldMap(policy1);
+                break;
+            case 2:
+                data = this.formatDataForWorldMap(policy2);
+                break;
+            case 3:
+                data = this.formatDataForWorldMap(policy3);
+                break;
+            case 4:
+                data = this.formatDataForWorldMap(policy4);
+                break;
+            case 5:
+                data = this.formatDataForWorldMap(policy5);
+                break;
+            }
+
+            this.worldMapData = data;
+            this.drawWorldMapChart();
+        },
+        formatDataForWorldMap(jsonData) {
+            return jsonData.map(item => ({
+            name: item.country,
+            value: parseFloat(item.net_approval)
+            }));
+        },
 
         drawPolicyCategoryChart() {
             const chartDom = this.$refs.policyCategoryChart;
@@ -347,8 +376,14 @@ export default {
                         radius: '70%', // 可以调整饼图大小
                         center: ['60%', '55%'], // 调整饼图位置，给图例留出空间
                         data: this.policyCategoryStats,
+                        itemStyle: {
+                            areaColor: '#2a333d',
+                            borderColor: '#fff',   // 白色边框
+                            borderWidth: 1
+                        },
                         emphasis: {
                             itemStyle: {
+                                areaColor: '#2a333d',
                                 shadowBlur: 10,
                                 shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
@@ -495,9 +530,105 @@ export default {
                 });
             });
 
-            this.countryChart = countryChart;
-            this.avgChart = avgChart;
-        },
+  // —— 3. 点击图例时，只高光选中系列的线，其余系列调暗 —— 
+  const names = allSeries.map(s => s.name);
+  countryChart.on('legendselectchanged', ({ name: selectedName }) => {
+    names.forEach(name => {
+      countryChart.dispatchAction({
+        type: name === selectedName ? 'highlight' : 'downplay',
+        seriesName: name
+      });
+    });
+  });
+
+  this.countryChart = countryChart;
+
+  // —— 4. 平均折线（保持不变） —— 
+  const avgChart = echarts.init(this.$refs.avgChart);
+  avgChart.setOption({
+    title: {
+      text: '全体平均支持度趋势',
+      left: 'center',
+      textStyle: { color: '#fff' }
+    },
+    tooltip: { trigger: 'axis' },
+    legend: {
+      data: ['平均——总统','平均——国家'],
+      top: 30,
+      textStyle: { color: '#9AA8D4' }
+    },
+    grid: { left:'3%', right:'4%', bottom:'3%', containLabel:true },
+    xAxis: { type:'category', data:this.years, axisLabel:{ color:'#9AA8D4' } },
+    yAxis: { type:'value', axisLabel:{ color:'#9AA8D4' } },
+    series: [
+      { name:'平均——总统', type:'line', data:this.avgPres, smooth:true },
+      { name:'平均——国家', type:'line', data:this.avgNat, smooth:true, lineStyle:{ type:'dashed' }}
+    ]
+  });
+  window.addEventListener('resize', avgChart.resize);
+  this.avgChart = avgChart;
+},
+    drawWorldMapChart() {
+        const chartDom = this.$refs.worldMapChart;
+        if (!chartDom) return;
+
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            title: {
+            text: `特朗普提案 ${this.selectedIssue} - 各国净支持率分布`,
+            left: 'center',
+            textStyle: { color: '#fff' }
+            },
+            tooltip: {
+            trigger: 'item',
+            formatter: params => {
+                return `${params.name}<br/>净支持率: ${params.value}`;
+            }
+            },
+            visualMap: {
+                min: -100,
+                max: 100,
+                inRange: {
+                    color: ['#fff5eb', '#ff6600']
+                },
+                text: ['高支持率', '低支持率'],
+                calculable: true,
+                orient: 'horizontal',
+                bottom: 20,
+                left: 'center'
+            },
+            mapType: 'world',
+            roam: true,
+            itemStyle: {
+                areaColor: '#2a333d',
+                borderColor: '#111'
+            },
+            emphasis: {
+                itemStyle: {
+                    areaColor: '#2a333d'
+                }
+            },
+            series: [
+                {
+                    name: '净支持率',
+                    type: 'map',
+                    mapType: 'world',
+                    data: this.worldMapData,
+                    showLegendSymbol: true,
+                    label: {
+                    show: false
+                    }
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize());
+
+        // 保存实例用于销毁
+        this.worldMapChartInstance = myChart;
+        }
     },
     mounted() {
         console.log("Vue component mounted. Preparing new policy category chart.");
@@ -505,7 +636,7 @@ export default {
         this.processData();
         this.drawPolicyCategoryChart();
         this.drawCharts();
-
+        this.loadIssueData(this.selectedIssue);
     },
     beforeDestroy() {
         // 清理 ECharts 实例和事件监听器
@@ -513,6 +644,10 @@ export default {
             window.removeEventListener('resize', this.policyCategoryChartInstance.resize); // 如果是这样绑定的
             this.policyCategoryChartInstance.dispose();
             this.policyCategoryChartInstance = null;
+        }
+        if (this.worldMapChartInstance && !this.worldMapChartInstance.isDisposed()) {
+            this.worldMapChartInstance.dispose();
+            this.worldMapChartInstance = null;
         }
     }
 }
