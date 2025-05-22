@@ -89,6 +89,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="box-content" style="margin-top: 20px;">
+                    <div class="caption">
+                    <h4>提案国家支持率分布</h4>
+                    <select v-model="selectedIssue" @change="loadIssueData(selectedIssue)">
+                        <option v-for="num in issueOptions" :key="num" :value="num">提案 {{ num }}</option>
+                    </select>
+                    </div>
+                    <div ref="worldMapChart" style="height: 500px; width: 100%;"></div>
+                </div>
+            </div>
         </div>
         <div class="footer">
             <div class="bottom-line"></div>
@@ -100,6 +111,7 @@
 import axios from 'axios';
 import ICountUp from 'vue-countup-v2';
 import * as echarts from 'echarts'; // 确保已安装并引入 ECharts
+import 'echarts/map/js/world.js';
 
 // 导入政策分类数据
 import policyDataJson from '@/assets/data/分类.json'; // <<== 确保路径正确
@@ -144,6 +156,10 @@ export default {
             ],
             // 新图表所需数据
             policyCategoryStats: [],
+            selectedIssue: 1, // 当前选择的提案编号
+            issueOptions: [1, 2, 3, 4, 5], // 提案选项
+            worldMapData: [], // 用于保存热力图数据
+            chartInstance: null, // 地图图表实例
         };
     },
     methods: {
@@ -246,12 +262,88 @@ export default {
             });
             // 将 myChart 实例保存到组件实例上，以便在 beforeDestroy 中清理
             this.policyCategoryChartInstance = myChart;
-        }
+        },
+        loadIssueData(issueNumber) {
+            const fileName = `TRUMPWORLD-issue-${issueNumber}.json`;
+            fetch(require(`@/assets/data/${fileName}`))
+                .then(res => res.json())
+                .then(json => {
+                this.worldMapData = data.default.map(item => ({
+                    name: item.country,
+                    value: parseFloat(item.net_approval),
+                }));
+                console.log('处理后的地图数据:', this.worldMapData);
+                this.$nextTick(() => {
+                    this.drawWorldMapChart();
+                });
+            }).catch(err => {
+                console.error(`加载 ${fileName} 失败`, err);
+            });
+        },
+        drawWorldMapChart() {
+            if (!this.$refs.worldMapChart) return;
+
+            if (this.chartInstance) {
+                this.chartInstance.dispose(); // 清理旧实例
+            }
+
+            const chartDom = this.$refs.worldMapChart;
+            const myChart = echarts.init(chartDom);
+
+            if (!chartDom) {
+                console.error('世界地图容器未找到');
+                return;
+            }
+
+            console.log('找到地图容器:', chartDom);
+
+            const option = {
+                title: {
+                    text: `特朗普提案 ${this.selectedIssue} 国家净支持率`,
+                    left: 'center',
+                    textStyle: { color: '#9AA8D4' }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: params => {
+                        return `${params.name}<br/>净支持率: ${params.value}%`;
+                    }
+                },
+                visualMap: {
+                    min: -100,
+                    max: 100,
+                    inRange: {
+                        color: ['#d73027', '#ffffbf', '#4575b4']
+                    },
+                    text: ['强烈反对', '中立', '强烈支持'],
+                    calculable: true,
+                    orient: 'horizontal',
+                    bottom: 20,
+                    left: 'center',
+                    textStyle: { color: '#fff' }
+                },
+                series: [{
+                    name: '净支持率',
+                    type: 'map',
+                    map: 'world',
+                    roam: true,
+                    label: { show: false },
+                    data: this.worldMapData
+                }]
+            };
+
+            myChart.setOption(option);
+            this.chartInstance = myChart;
+
+            // 注册 resize 监听器
+            window.addEventListener('resize', this.onWindowResize);
+        },
     },
     mounted() {
         console.log("Vue component mounted. Preparing new policy category chart.");
         this.processPolicyCategoryData();
         this.drawPolicyCategoryChart();
+        this.loadIssueData(this.selectedIssue);
     },
     beforeDestroy() {
         // 清理 ECharts 实例和事件监听器
