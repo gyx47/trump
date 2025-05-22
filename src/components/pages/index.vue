@@ -115,14 +115,14 @@ import ICountUp from 'vue-countup-v2';
 import * as echarts from 'echarts'; // 确保已安装并引入 ECharts
 
 // 导入政策分类数据
-import policyDataJson from '@/assets/data/分类.json'; 
-import policy1 from '@/assets/data/TRUMPWORLD-issue-1.json'; 
-import policy2 from '@/assets/data/TRUMPWORLD-issue-2.json'; 
-import policy3 from '@/assets/data/TRUMPWORLD-issue-3.json'; 
-import policy4 from '@/assets/data/TRUMPWORLD-issue-4.json'; 
-import policy5 from '@/assets/data/TRUMPWORLD-issue-5.json'; 
-import pres from '@/assets/data/TRUMPWORLD-pres.json'; 
-import us from '@/assets/data/TRUMPWORLD-us.json'; 
+import policyDataJson from '@/assets/data/分类.json';
+import policy1 from '@/assets/data/TRUMPWORLD-issue-1.json';
+import policy2 from '@/assets/data/TRUMPWORLD-issue-2.json';
+import policy3 from '@/assets/data/TRUMPWORLD-issue-3.json';
+import policy4 from '@/assets/data/TRUMPWORLD-issue-4.json';
+import policy5 from '@/assets/data/TRUMPWORLD-issue-5.json';
+import pres from '@/assets/data/TRUMPWORLD-pres.json';
+import us from '@/assets/data/TRUMPWORLD-us.json';
 
 // 保留可能通用的辅助函数
 // var Order = "orderID"; // 如果不再需要可以移除
@@ -361,98 +361,127 @@ export default {
         },
 
         drawCharts() {
-  // —— 1. 准备 series 数据，并设置初始样式 —— 
-  const allSeries = [
-    ...this.seriesPres.map(s => ({ ...s, smooth: true })),
-    ...this.seriesNat .map(s => ({
-      ...s,
-      smooth: true,
-      lineStyle: { type: 'dashed' },
-      name: s.name + '（国家）'
-    }))
-  ].map(serie => {
-    // 默认都调暗，不渲染点
-    const baseLineStyle = { opacity: 0.2, width: 2 };
-    // 鼠标 / 程序高光时只高光线
-    const emphasis = {
-      focus: 'series',
-      lineStyle: { opacity: 1, width: 3 }
-    };
-    return {
-      ...serie,
-      showSymbol: false,
-      lineStyle: { ...baseLineStyle, ...(serie.lineStyle || {}) },
-      emphasis
-    };
-  });
+            // —— 1. 多国折线 —— 
+            // 我们把总统和国家两套 series 拼到一起
+            const allSeries = [
+                ...this.seriesPres.map(s => ({ ...s, smooth: true, lineStyle: { width: 2 } })),
+                ...this.seriesNat.map(s => ({
+                    ...s, smooth: true, lineStyle: { width: 2 },
+                    // 给国家系列加个后缀区分
+                    name: s.name + '（国家）'
+                }))
+            ].map(serie => {
+                // 默认调暗
+                const baseLineStyle = { opacity: 5, width: 5 };
+                // 鼠标 / programmatic 高光时恢复
+                const emphasis = { focus: 'series', lineStyle: { opacity: 10, width: 30,color: 'red' } };
+                return {
+                    ...serie,
+                    lineStyle: { ...baseLineStyle, ...(serie.lineStyle || {}) },
+                    emphasis
+                };
+            });
+            console.log("allSeries", allSeries);
+            const countryChart = echarts.init(this.$refs.countryCharts);
+            countryChart.setOption({
+                title: {
+                    text: '各国对总统 & 对国家支持度趋势',
+                    left: 'center',
+                    textStyle: { color: '#fff' }
+                },
+                tooltip: { trigger: 'axis' },
+                legend: {
+                    data: allSeries.map(s => s.name),
+                    type: 'scroll',
+                    top: 30,
+                    textStyle: { color: '#9AA8D4' }
+                },
+                grid: { left: '3%', right: '4%', bottom: '8%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    data: this.years,
+                    axisLabel: { color: '#9AA8D4' }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#9AA8D4' }
+                },
+                series: allSeries
+            });
+            window.addEventListener('resize', countryChart.resize);
 
-  // —— 2. 初始化图表并设置 option —— 
-  const countryChart = echarts.init(this.$refs.countryCharts);
-  countryChart.setOption({
-    title: {
-      text: '各国对总统 & 对国家支持度趋势',
-      left: 'center',
-      textStyle: { color: '#fff' }
-    },
-    tooltip: { trigger: 'axis' },
-    legend: {
-      data: allSeries.map(s => s.name),
-      type: 'scroll',
-      top: 30,
-      textStyle: { color: '#9AA8D4' }
-    },
-    grid: { left: '3%', right: '4%', bottom: '8%', containLabel: true },
-    xAxis: {
-      type: 'category',
-      data: this.years,
-      axisLabel: { color: '#9AA8D4' }
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: { color: '#9AA8D4' }
-    },
-    series: allSeries
-  });
-  window.addEventListener('resize', countryChart.resize);
+            // —— 2. 全体平均折线 —— 
+            const avgChart = echarts.init(this.$refs.avgChart);
+            avgChart.setOption({
+                title: {
+                    text: '全体平均支持度趋势',
+                    left: 'center',
+                    textStyle: { color: '#fff' }
+                },
+                tooltip: { trigger: 'axis' },
+                legend: {
+                    data: ['平均——总统', '平均——国家'],
+                    top: 30,
+                    textStyle: { color: '#9AA8D4' }
+                },
+                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    data: this.years,
+                    axisLabel: { color: '#9AA8D4' }
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: { color: '#9AA8D4' }
+                },
+                series: [
+                    {
+                        name: '平均——总统',
+                        type: 'line',
+                        data: this.avgPres,
+                        smooth: true,
+                        lineStyle: { width: 2 }
+                    },
+                    {
+                        name: '平均——国家',
+                        type: 'line',
+                        data: this.avgNat,
+                        smooth: true,
+                        lineStyle: { width: 2, type: 'dashed' }
+                    }
+                ]
+            });
+            window.addEventListener('resize', avgChart.resize);
+            countryChart.on('legendselectchanged', params => {
+                const clickedSeriesName = params.name; // 获取当前被点击操作的图例项目名称 (string)
+                const selectionStates = params.selected; // 获取所有图例项目的当前选中状态 (object)
+                console.log("Clicked series name:", clickedSeriesName);
+                console.log("Selection states:", selectionStates);
+                console.log("All series:", allSeries);
+                allSeries.forEach(serie => {
+                    // 检查当前遍历到的系列 (serie) 是否是刚刚被点击的那个，
+                    // 并且这个系列在图例中现在是“选中”状态
+                    if (serie.name === clickedSeriesName && selectionStates[clickedSeriesName]) {
+                        // 如果是，则高亮这个系列
+                        countryChart.dispatchAction({
+                            type: 'highlight',
+                            seriesName: serie.name
+                        });
+                    } else {
+                        // 否则，将其余所有系列都设置为普通（在你代码中是暗淡）状态
+                        // (包括那些被取消选中的系列，以及其他未被点击但仍保持选中状态的系列)
+                        // ECharts 默认会隐藏取消选中的图例对应的系列，downplay 调用能确保其视觉效果回到基础样式
+                        countryChart.dispatchAction({
+                            type: 'downplay',
+                            seriesName: serie.name
+                        });
+                    }
+                });
+            });
 
-  // —— 3. 点击图例时，只高光选中系列的线，其余系列调暗 —— 
-  const names = allSeries.map(s => s.name);
-  countryChart.on('legendselectchanged', ({ name: selectedName }) => {
-    names.forEach(name => {
-      countryChart.dispatchAction({
-        type: name === selectedName ? 'highlight' : 'downplay',
-        seriesName: name
-      });
-    });
-  });
-
-  this.countryChart = countryChart;
-
-  // —— 4. 平均折线（保持不变） —— 
-  const avgChart = echarts.init(this.$refs.avgChart);
-  avgChart.setOption({
-    title: {
-      text: '全体平均支持度趋势',
-      left: 'center',
-      textStyle: { color: '#fff' }
-    },
-    tooltip: { trigger: 'axis' },
-    legend: {
-      data: ['平均——总统','平均——国家'],
-      top: 30,
-      textStyle: { color: '#9AA8D4' }
-    },
-    grid: { left:'3%', right:'4%', bottom:'3%', containLabel:true },
-    xAxis: { type:'category', data:this.years, axisLabel:{ color:'#9AA8D4' } },
-    yAxis: { type:'value', axisLabel:{ color:'#9AA8D4' } },
-    series: [
-      { name:'平均——总统', type:'line', data:this.avgPres, smooth:true },
-      { name:'平均——国家', type:'line', data:this.avgNat, smooth:true, lineStyle:{ type:'dashed' }}
-    ]
-  });
-  window.addEventListener('resize', avgChart.resize);
-  this.avgChart = avgChart;
-}
+            this.countryChart = countryChart;
+            this.avgChart = avgChart;
+        },
     },
     mounted() {
         console.log("Vue component mounted. Preparing new policy category chart.");
