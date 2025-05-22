@@ -376,8 +376,14 @@ export default {
                         radius: '70%', // 可以调整饼图大小
                         center: ['60%', '55%'], // 调整饼图位置，给图例留出空间
                         data: this.policyCategoryStats,
+                        itemStyle: {
+                            areaColor: '#2a333d',
+                            borderColor: '#fff',   // 白色边框
+                            borderWidth: 1
+                        },
                         emphasis: {
                             itemStyle: {
+                                areaColor: '#2a333d',
                                 shadowBlur: 10,
                                 shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
@@ -517,39 +523,39 @@ export default {
             }
             },
             visualMap: {
-            min: -100,
-            max: 100,
-            inRange: {
-                color: ['#f7fbff', '#08306b']
-            },
-            text: ['高支持率', '低支持率'],
-            calculable: true,
-            orient: 'horizontal',
-            bottom: 20,
-            left: 'center'
+                min: -100,
+                max: 100,
+                inRange: {
+                    color: ['#fff5eb', '#ff6600']
+                },
+                text: ['高支持率', '低支持率'],
+                calculable: true,
+                orient: 'horizontal',
+                bottom: 20,
+                left: 'center'
             },
             mapType: 'world',
             roam: true,
             itemStyle: {
-            areaColor: '#2a333d',
-            borderColor: '#111'
+                areaColor: '#2a333d',
+                borderColor: '#111'
             },
             emphasis: {
-            itemStyle: {
-                areaColor: '#2a333d'
-            }
+                itemStyle: {
+                    areaColor: '#2a333d'
+                }
             },
             series: [
-            {
-                name: '净支持率',
-                type: 'map',
-                mapType: 'world',
-                data: this.worldMapData,
-                showLegendSymbol: true,
-                label: {
-                show: false
+                {
+                    name: '净支持率',
+                    type: 'map',
+                    mapType: 'world',
+                    data: this.worldMapData,
+                    showLegendSymbol: true,
+                    label: {
+                    show: false
+                    }
                 }
-            }
             ]
         };
 
