@@ -102,6 +102,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="box-content" style="margin-top: 20px;">
+                    <div class="caption">
+                    <h4>提案国家支持率分布</h4>
+                    <select v-model="selectedIssue" @change="loadIssueData(selectedIssue)">
+                        <option v-for="num in issueOptions" :key="num" :value="num">提案 {{ num }}</option>
+                    </select>
+                    </div>
+                    <div ref="worldMapChart" style="height: 500px; width: 100%;"></div>
+                </div>
+            </div>
         </div>
         <div class="footer">
             <div class="bottom-line"></div>
@@ -113,6 +124,7 @@
 import axios from 'axios';
 import ICountUp from 'vue-countup-v2';
 import * as echarts from 'echarts'; // 确保已安装并引入 ECharts
+import 'echarts/map/js/world.js';
 
 // 导入政策分类数据
 import policyDataJson from '@/assets/data/分类.json';
@@ -164,6 +176,10 @@ export default {
             ],
             // 新图表所需数据
             policyCategoryStats: [],
+            selectedIssue: 1, // 当前选择的提案编号
+            issueOptions: [1, 2, 3, 4, 5], // 提案选项
+            worldMapData: [], // 用于保存热力图数据
+            chartInstance: null, // 地图图表实例
             years: [],
             countries: [],        // 国家列表（从字段名里提取）
             seriesPres: [],       // 对总统支持度的多国折线数据
