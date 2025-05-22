@@ -31,6 +31,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12" style="margin-top:20px;">
+                    <h5 style="color:#fff;">各国支持度趋势</h5>
+                    <div ref="countryCharts" style="width:100%; height:300px;"></div>
+                </div>
+                <div class="col-md-12" style="margin-top:20px;">
+                    <h5 style="color:#fff;">平均支持度趋势</h5>
+                    <div ref="avgChart" style="width:100%; height:200px;"></div>
+                </div>
 
                 <div class="col-md-12">
                     <table class="table border-table darkblue" style="width: 100%" cellpadding="0" cellspacing="0">
@@ -38,10 +46,8 @@
                             <td class="th" style="width: 90px;">排名</td>
                             <td class="th">区域</td>
                             <td class="th td_right">
-                                <!-- 年销售量 -->
                             </td>
                             <td class="th td_right">
-                                <!-- 月销售量 -->
                             </td>
                         </tr>
                         <tr v-for="(item, index) in datalist" :key="item.id">
@@ -60,6 +66,12 @@
                 </div>
 
             </div>
+            <!-- 比如放在左侧 col-md-4 内，表格下方 -->
+            <!-- <div class="col-md-12" style="margin-top: 20px;">
+                <div ref="myLineChart" style="height: 300px; width: 100%;"></div>
+            </div> -->
+            <div ref="countryCharts" style="width:100%; height:400px;"></div>
+            <div ref="avgChart" style="width:100%; height:300px; margin-top:20px;"></div>
 
             <div class="col-md-8">
                 <div class="row">
@@ -81,7 +93,8 @@
                                 <div ref="policyCategoryChart" style="height: 400px; width: 100%;"></div>
                             </div>
 
-                            <div class="new-interactive-section" style="height: 200px; border: 1px dashed #ccc; margin-top: 20px; padding: 10px; color: #fff; text-align:center;">
+                            <div class="new-interactive-section"
+                                style="height: 200px; border: 1px dashed #ccc; margin-top: 20px; padding: 10px; color: #fff; text-align:center;">
                                 (其他新的交互界面将在这里展示...)
                             </div>
 
@@ -102,7 +115,14 @@ import ICountUp from 'vue-countup-v2';
 import * as echarts from 'echarts'; // 确保已安装并引入 ECharts
 
 // 导入政策分类数据
-import policyDataJson from '@/assets/data/分类.json'; // <<== 确保路径正确
+import policyDataJson from '@/assets/data/分类.json'; 
+import policy1 from '@/assets/data/TRUMPWORLD-issue-1.json'; 
+import policy2 from '@/assets/data/TRUMPWORLD-issue-2.json'; 
+import policy3 from '@/assets/data/TRUMPWORLD-issue-3.json'; 
+import policy4 from '@/assets/data/TRUMPWORLD-issue-4.json'; 
+import policy5 from '@/assets/data/TRUMPWORLD-issue-5.json'; 
+import pres from '@/assets/data/TRUMPWORLD-pres.json'; 
+import us from '@/assets/data/TRUMPWORLD-us.json'; 
 
 // 保留可能通用的辅助函数
 // var Order = "orderID"; // 如果不再需要可以移除
@@ -144,6 +164,12 @@ export default {
             ],
             // 新图表所需数据
             policyCategoryStats: [],
+            years: [],
+            countries: [],        // 国家列表（从字段名里提取）
+            seriesPres: [],       // 对总统支持度的多国折线数据
+            seriesNat: [],        // 对国家支持度的多国折线数据
+            avgPres: [],          // 全体平均——总统
+            avgNat: [],           // 全体平均——国家
         };
     },
     methods: {
@@ -153,18 +179,72 @@ export default {
         tdSelect(item) {
             console.log("Selected area:", item);
         },
+        processData() {
+            // ① 年份数组
+            this.years = pres.map(d => d.year);
 
+            // ② 国家列表：取第 1 条记录的所有字段，去掉 "year" 和 "avg"
+            this.countries = Object.keys(pres[0])
+                .filter(k => k !== 'year' && k !== 'avg');
+
+            // ③ 每个国家的两条折线
+            this.seriesPres = this.countries.map(country => ({
+                name: country,
+                type: 'line',
+                data: pres.map(d => d[country] !== '' ? +d[country] : null)
+            }));
+            this.seriesNat = this.countries.map(country => ({
+                name: country,
+                type: 'line',
+                data: us.map(d => d[country] !== '' ? +d[country] : null)
+            }));
+
+            // ④ 全体平均
+            this.avgPres = pres.map(d => +d.avg);
+            this.avgNat = us.map(d => +d.avg);
+        },
         processPolicyCategoryData() {
-            if (!policyDataJson || !Array.isArray(policyDataJson)) {
-                console.error("政策分类数据加载失败或格式不正确!");
-                this.policyCategoryStats = [];
-                return;
-            }
 
             const categoryCounts = {};
+            const policy1count = {};
+            const policy2count = {};
+            const policy3count = {};
+            const policy4count = {};
+            const policy5count = {};
             policyDataJson.forEach(item => {
                 if (item.category) {
-                    categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
+                    categoryCounts[item.category] = categoryCounts[item.category];
+                }
+            });
+            // console.log("政策分类数据:", policyDataJson);
+            // console.log(categoryCounts)
+            //每个国家对特朗普政策的支持率，所有国家
+            policy1.forEach(item => {
+                if (item.country) {
+                    console.log(item.country)
+                    policy1count[item.country] = policy1count[item.net_approval];
+                }
+            });
+            console.log(policy1)
+            console.log("111", policy1count)
+            policy2.forEach(item => {
+                if (item.country) {
+                    policy2count[item.country] = policy2count[item.net_approval];
+                }
+            });
+            policy3.forEach(item => {
+                if (item.country) {
+                    policy3count[item.country] = policy3count[item.net_approval];
+                }
+            });
+            policy4.forEach(item => {
+                if (item.country) {
+                    policy4count[item.country] = policy4count[item.net_approval];
+                }
+            });
+            policy5.forEach(item => {
+                if (item.country) {
+                    policy5count[item.country] = policy5count[item.net_approval];
                 }
             });
 
@@ -174,6 +254,38 @@ export default {
                     value: categoryCounts[categoryName]
                 };
             });
+            this.policy1 = Object.keys(policy1count).map(categoryName => {
+                return {
+                    name: categoryName,
+                    value: policy1count[categoryName]
+                };
+            });
+            this.policy2 = Object.keys(policy2count).map(categoryName => {
+                return {
+                    name: categoryName,
+                    value: policy2count[categoryName]
+                };
+            });
+            this.policy3 = Object.keys(policy3count).map(categoryName => {
+                return {
+                    name: categoryName,
+                    value: policy3count[categoryName]
+                };
+            });
+            this.policy4 = Object.keys(policy4count).map(categoryName => {
+                return {
+                    name: categoryName,
+                    value: policy4count[categoryName]
+                };
+            });
+            this.policy5 = Object.keys(policy5count).map(categoryName => {
+                return {
+                    name: categoryName,
+                    value: policy5count[categoryName]
+                };
+            });
+
+
         },
 
         drawPolicyCategoryChart() {
@@ -183,9 +295,9 @@ export default {
                 return;
             }
             if (!this.policyCategoryStats || this.policyCategoryStats.length === 0) {
-                 console.warn("政策分类数据为空，不绘制图表。");
-                 // 可以在DOM上显示提示信息
-                 chartDom.innerHTML = '<p style="color: #fff; text-align: center; padding-top: 20px;">政策分类数据为空</p>';
+                console.warn("政策分类数据为空，不绘制图表。");
+                // 可以在DOM上显示提示信息
+                chartDom.innerHTML = '<p style="color: #fff; text-align: center; padding-top: 20px;">政策分类数据为空</p>';
                 return;
             }
 
@@ -240,18 +352,115 @@ export default {
             };
             myChart.setOption(option);
             window.addEventListener('resize', () => {
-                 if (myChart && !myChart.isDisposed()) {
+                if (myChart && !myChart.isDisposed()) {
                     myChart.resize();
                 }
             });
             // 将 myChart 实例保存到组件实例上，以便在 beforeDestroy 中清理
             this.policyCategoryChartInstance = myChart;
-        }
+        },
+
+        drawCharts() {
+  // —— 1. 准备 series 数据，并设置初始样式 —— 
+  const allSeries = [
+    ...this.seriesPres.map(s => ({ ...s, smooth: true })),
+    ...this.seriesNat .map(s => ({
+      ...s,
+      smooth: true,
+      lineStyle: { type: 'dashed' },
+      name: s.name + '（国家）'
+    }))
+  ].map(serie => {
+    // 默认都调暗，不渲染点
+    const baseLineStyle = { opacity: 0.2, width: 2 };
+    // 鼠标 / 程序高光时只高光线
+    const emphasis = {
+      focus: 'series',
+      lineStyle: { opacity: 1, width: 3 }
+    };
+    return {
+      ...serie,
+      showSymbol: false,
+      lineStyle: { ...baseLineStyle, ...(serie.lineStyle || {}) },
+      emphasis
+    };
+  });
+
+  // —— 2. 初始化图表并设置 option —— 
+  const countryChart = echarts.init(this.$refs.countryCharts);
+  countryChart.setOption({
+    title: {
+      text: '各国对总统 & 对国家支持度趋势',
+      left: 'center',
+      textStyle: { color: '#fff' }
+    },
+    tooltip: { trigger: 'axis' },
+    legend: {
+      data: allSeries.map(s => s.name),
+      type: 'scroll',
+      top: 30,
+      textStyle: { color: '#9AA8D4' }
+    },
+    grid: { left: '3%', right: '4%', bottom: '8%', containLabel: true },
+    xAxis: {
+      type: 'category',
+      data: this.years,
+      axisLabel: { color: '#9AA8D4' }
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: { color: '#9AA8D4' }
+    },
+    series: allSeries
+  });
+  window.addEventListener('resize', countryChart.resize);
+
+  // —— 3. 点击图例时，只高光选中系列的线，其余系列调暗 —— 
+  const names = allSeries.map(s => s.name);
+  countryChart.on('legendselectchanged', ({ name: selectedName }) => {
+    names.forEach(name => {
+      countryChart.dispatchAction({
+        type: name === selectedName ? 'highlight' : 'downplay',
+        seriesName: name
+      });
+    });
+  });
+
+  this.countryChart = countryChart;
+
+  // —— 4. 平均折线（保持不变） —— 
+  const avgChart = echarts.init(this.$refs.avgChart);
+  avgChart.setOption({
+    title: {
+      text: '全体平均支持度趋势',
+      left: 'center',
+      textStyle: { color: '#fff' }
+    },
+    tooltip: { trigger: 'axis' },
+    legend: {
+      data: ['平均——总统','平均——国家'],
+      top: 30,
+      textStyle: { color: '#9AA8D4' }
+    },
+    grid: { left:'3%', right:'4%', bottom:'3%', containLabel:true },
+    xAxis: { type:'category', data:this.years, axisLabel:{ color:'#9AA8D4' } },
+    yAxis: { type:'value', axisLabel:{ color:'#9AA8D4' } },
+    series: [
+      { name:'平均——总统', type:'line', data:this.avgPres, smooth:true },
+      { name:'平均——国家', type:'line', data:this.avgNat, smooth:true, lineStyle:{ type:'dashed' }}
+    ]
+  });
+  window.addEventListener('resize', avgChart.resize);
+  this.avgChart = avgChart;
+}
     },
     mounted() {
         console.log("Vue component mounted. Preparing new policy category chart.");
         this.processPolicyCategoryData();
+        this.processData();
         this.drawPolicyCategoryChart();
+        this.drawCharts();
+
     },
     beforeDestroy() {
         // 清理 ECharts 实例和事件监听器
@@ -307,10 +516,13 @@ export default {
     -webkit-transition: border 0.2s ease-in-out;
     -o-transition: border 0.2s ease-in-out;
     transition: border 0.2s ease-in-out;
-     /* 为了美观，给图表容器也加上背景和边框 */
-    /* background-color: rgba(25, 47, 89, 0.5); */ /* 示例背景色 */
-    /* border: 1px solid rgba(130, 157, 248, 0.3); */ /* 示例边框色 */
-    padding: 10px; /* 增加内边距 */
+    /* 为了美观，给图表容器也加上背景和边框 */
+    /* background-color: rgba(25, 47, 89, 0.5); */
+    /* 示例背景色 */
+    /* border: 1px solid rgba(130, 157, 248, 0.3); */
+    /* 示例边框色 */
+    padding: 10px;
+    /* 增加内边距 */
 }
 
 .statistic-item {
