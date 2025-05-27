@@ -1,131 +1,84 @@
 <template>
     <div class="page">
-      <div class="header">
-        <div class="title">特朗普支持率研究</div>
-        <div class="title-bottom">
-          <div class="bottom-sidebar"></div>
+        <div class="header">
+            <div class="title">特朗普支持率研究</div>
+            <div class="title-bottom">
+                <div class="bottom-sidebar"></div>
+            </div>
         </div>
-      </div>
-  
-      <div class="row">
-        <!-- 左侧侧栏 -->
-        <div class="col-md-4">
-          <!-- 统计数字 -->
-          <!-- 左侧固定小像 -->
-          <div class="col-md-4 trump-fixed-container">
-                <div class="trump-portrait-container">
-                    <img 
-                        src="@/assets/images/trump2.jpg" 
-                        alt="Donald Trump" 
-                        class="trump-portrait"
-                        @mouseover="showTrumpInfo = true"
-                        @mouseleave="showTrumpInfo = false"
-                    >
-                    <div v-if="showTrumpInfo" class="trump-info-tooltip">
-                        {{ trumpInfo }}
+
+        <div class="row">
+            <!-- 左侧侧栏 -->
+            <div class="col-md-4">
+                <!-- 统计数字 -->
+                <!-- 左侧固定小像 -->
+                <div class="col-md-4 trump-fixed-container">
+                    <div class="trump-portrait-container">
+                        <img src="@/assets/images/trump2.jpg" alt="Donald Trump" class="trump-portrait"
+                            @mouseover="showTrumpInfo = true" @mouseleave="showTrumpInfo = false">
+                        <div v-if="showTrumpInfo" class="trump-info-tooltip">
+                            {{ trumpInfo }}
+                        </div>
                     </div>
                 </div>
             </div>
-  
-         
-  
-          <!-- 数据表格 -->
-          <!-- <div class="box-content">
-            <table
-              class="table border-table darkblue mb-0"
-              style="width:100%;"
-              cellpadding="0"
-              cellspacing="0"
-            >
-              <thead>
-                <tr>
-                  <th style="width:90px;">排名</th>
-                  <th>区域</th>
-                  <th class="text-right">本月</th>
-                  <th class="text-right">上月</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, idx) in datalist" :key="idx">
-                  <td>{{ idx + 1 }}</td>
-                  <td class="enable" @click="tdSelect(item)">{{ item.area }}</td>
-                  <td class="text-right">{{ item.nValue }}</td>
-                  <td class="text-right">{{ item.yValue }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> -->
-        </div>
-  
-        <!-- 右侧主栏 -->
-        <div class="col-md-8">
-          <!-- 饼图区域 -->
-          <div class="box-content mb-4">
-            <div class="caption mb-3">
-              <h6>特朗普政策提案类型统计</h6>
-            </div>
-            <div ref="policyCategoryChart" style="width:100%; height:400px;"></div>
-          </div>
-           <!-- 各国支持度趋势 -->
-           <div class="box-content mb-4">
-            <h5 class="caption mb-2" style="color:#fff;">各国支持度趋势</h5>
-            <div ref="countryCharts" style="width:100%; height:300px;"></div>
-          </div>
-  
-          <!-- 平均支持度趋势 -->
-          <div class="box-content mb-4">
-            <h5 class="caption mb-2" style="color:#fff;">平均支持度趋势</h5>
-            <div ref="avgChart" style="width:100%; height:200px;"></div>
-          </div>
-          <!-- 世界热力图选择 -->
-          <div class="box-content mb-4">
-            <div class="caption mb-2 d-flex align-items-center">
-              <h6 class="mb-0 mr-3">提案国家支持率分布</h6>
-              <select
-                v-model="selectedIssue"
-                @change="loadIssueData(selectedIssue)"
-                class="form-control form-control-sm"
-                style="width: auto;"
-              >
-                <option
-                  v-for="num in issueOptions"
-                  :key="num"
-                  :value="num"
-                >
-                  提案 {{ num }}
-                </option>
-              </select>
-            </div>
-            <div ref="worldMapChart" style="width:100%; height:500px;"></div>
-          </div>
-  
-          <!-- 预留交互区 -->
-          <!-- <div class="new-interactive-section">
+
+            <!-- 右侧主栏 -->
+            <div class="col-md-8">
+                <!-- 饼图区域 -->
+                <div class="box-content mb-4">
+                    <div class="caption mb-3">
+                        <h6>特朗普政策提案类型统计</h6>
+                    </div>
+                    <div ref="policyCategoryChart" style="width:100%; height:400px;"></div>
+                </div>
+                <!-- 各国支持度趋势 -->
+                <div class="box-content mb-4">
+                    <h5 class="caption mb-2" style="color:#fff;">各国支持度趋势</h5>
+                    <div ref="countryCharts" style="width:100%; height:300px;"></div>
+                </div>
+
+                <!-- 平均支持度趋势 -->
+                <div class="box-content mb-4">
+                    <h5 class="caption mb-2" style="color:#fff;">平均支持度趋势</h5>
+                    <div ref="avgChart" style="width:100%; height:200px;"></div>
+                </div>
+                <!-- 世界热力图选择 -->
+                <div class="box-content mb-4">
+                    <div class="caption mb-2 d-flex align-items-center">
+                        <h6 class="mb-0 mr-3">提案国家支持率分布</h6>
+                        <select v-model="selectedIssue" @change="loadIssueData(selectedIssue)"
+                            class="form-control form-control-sm" style="width: auto;">
+                            <option v-for="num in issueOptions" :key="num" :value="num">
+                                提案 {{ num }}
+                            </option>
+                        </select>
+                    </div>
+                    <div ref="worldMapChart" style="width:100%; height:500px;"></div>
+                </div>
+
+                <!-- 预留交互区 -->
+                <!-- <div class="new-interactive-section">
             (其他新的交互界面将在这里展示...)
           </div> -->
-          <div class="word-cloud-container">
-    <h2>关键词词云图</h2>
+                <div class="word-cloud-container">
+                    <h2>关键词词云图</h2>
 
-        <wordcloud
-        :data="defaultWords"
-        nameKey="name"
-        valueKey="value"
-        :color="myColors"
-        :showTooltip="true"
-        :wordClick="wordClickHandler">
-        </wordcloud>
+                    <wordcloud :data="defaultWords" nameKey="name" valueKey="value" :color="myColors"
+                        :showTooltip="true" :wordClick="wordClickHandler">
+                    </wordcloud>
 
-      
-  </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-  
-      <div class="footer">
-        <div class="bottom-line"></div>
-      </div>
+
+        <div class="footer">
+            <div class="bottom-line"></div>
+        </div>
     </div>
-  </template>
-  
+</template>
+
 <script>
 import axios from 'axios';
 import ICountUp from 'vue-countup-v2';
@@ -154,7 +107,7 @@ export default {
     name: 'index',
     components: {
         ICountUp,
-        wordcloud,  
+        wordcloud,
         // ECharts // 如果作为组件使用
     },
     data() {
@@ -168,53 +121,53 @@ export default {
                 prefix: '',
                 suffix: ''
             },
-           
+
             myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
-        defaultWords: [{ name: 'poll', value: 302 },
-  { name: 'polls', value: 109 },
-  { name: 'lead', value: 54 },
-  { name: 'cruz', value: 42 },
-  { name: 'iowa', value: 42 },
-  { name: 'big', value: 41 },
-  { name: 'gop', value: 39 },
-  { name: 'carson', value: 38 },
-  { name: 'debate', value: 36 },
-  { name: 'makeamericagreatagain', value: 33 },
-  { name: 'rubio', value: 33 },
-  { name: 'national', value: 31 },
-  { name: 'leading', value: 27 },
-  { name: 'hillary', value: 26 },
-  { name: 'bush', value: 26 },
-  { name: 'america', value: 21 },
-  { name: 'shows', value: 21 },
-  { name: 'wow', value: 21 },
-  { name: 'win', value: 18 },
-  { name: 'reuters', value: 18 },
-  { name: 'clinton', value: 16 },
-  { name: 'fox', value: 12 },
-  { name: 'race', value: 12 },
-  { name: 'ahead', value: 9 },
-  { name: 'voters', value: 8 },
-  { name: 'election', value: 6 },
-  { name: 'candidate', value: 6 },
-  { name: 'pollster', value: 4 },
-  { name: 'nominee', value: 4 },
-  { name: 'trump', value: 2 }
-        
-      
-],
+            defaultWords: [{ name: 'poll', value: 302 },
+            { name: 'polls', value: 109 },
+            { name: 'lead', value: 54 },
+            { name: 'cruz', value: 42 },
+            { name: 'iowa', value: 42 },
+            { name: 'big', value: 41 },
+            { name: 'gop', value: 39 },
+            { name: 'carson', value: 38 },
+            { name: 'debate', value: 36 },
+            { name: 'makeamericagreatagain', value: 33 },
+            { name: 'rubio', value: 33 },
+            { name: 'national', value: 31 },
+            { name: 'leading', value: 27 },
+            { name: 'hillary', value: 26 },
+            { name: 'bush', value: 26 },
+            { name: 'america', value: 21 },
+            { name: 'shows', value: 21 },
+            { name: 'wow', value: 21 },
+            { name: 'win', value: 18 },
+            { name: 'reuters', value: 18 },
+            { name: 'clinton', value: 16 },
+            { name: 'fox', value: 12 },
+            { name: 'race', value: 12 },
+            { name: 'ahead', value: 9 },
+            { name: 'voters', value: 8 },
+            { name: 'election', value: 6 },
+            { name: 'candidate', value: 6 },
+            { name: 'pollster', value: 4 },
+            { name: 'nominee', value: 4 },
+            { name: 'trump', value: 2 }
+
+
+            ],
 
             // 新图表所需数据
             policyCategoryStats: [],
             selectedIssue: 1, // 当前选择的提案编号
             issueOptions: [1, 2, 3, 4, 5], // 提案选项
             proposalLabels: { // <--- 新增这个对象
-        1: "撤销对国际气候变化协议的支持",
-        2: "在美国和墨西哥边境修建隔离墙",
-        3: "撤回美国对伊朗核武器协议的支持",
-        4: "撤回美国对主要贸易协议的支持",
-        5: "对来自某些穆斯林为主国家的入境人员实行更严格的限制"
-      },
+                1: "撤销对国际气候变化协议的支持",
+                2: "在美国和墨西哥边境修建隔离墙",
+                3: "撤回美国对伊朗核武器协议的支持",
+                4: "撤回美国对主要贸易协议的支持",
+                5: "对来自某些穆斯林为主国家的入境人员实行更严格的限制"
+            },
             worldMapData: [], // 用于保存热力图数据
             chartInstance: null, // 地图图表实例
             years: [],
@@ -229,13 +182,13 @@ export default {
         };
     },
     methods: {
-         // 在 mounted 或 processData 里做一次转换：
-    //   prepareWordCloud() {
-    //     this.words = this.rawWords.map(([text, value]) => ({ text, value }));
-    //   },
-    wordClickHandler(name, value, vm) {
-      console.log('wordClickHandler', name, value, vm);
-    },
+        // 在 mounted 或 processData 里做一次转换：
+        //   prepareWordCloud() {
+        //     this.words = this.rawWords.map(([text, value]) => ({ text, value }));
+        //   },
+        wordClickHandler(name, value, vm) {
+            console.log('wordClickHandler', name, value, vm);
+        },
         onReady: function (instance, CountUp) {
             return;
         },
@@ -276,7 +229,7 @@ export default {
             const policy5count = {};
             policyDataJson.forEach(item => {
                 if (item.category) {
-                    categoryCounts[item.category] = (categoryCounts[item.category]|| 0) + 1;
+                    categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
                 }
             });
             // console.log("政策分类数据:", policyDataJson);
@@ -353,21 +306,21 @@ export default {
         loadIssueData(issueNumber) {
             let data = [];
             switch (issueNumber) {
-            case 1:
-                data = this.formatDataForWorldMap(policy1);
-                break;
-            case 2:
-                data = this.formatDataForWorldMap(policy2);
-                break;
-            case 3:
-                data = this.formatDataForWorldMap(policy3);
-                break;
-            case 4:
-                data = this.formatDataForWorldMap(policy4);
-                break;
-            case 5:
-                data = this.formatDataForWorldMap(policy5);
-                break;
+                case 1:
+                    data = this.formatDataForWorldMap(policy1);
+                    break;
+                case 2:
+                    data = this.formatDataForWorldMap(policy2);
+                    break;
+                case 3:
+                    data = this.formatDataForWorldMap(policy3);
+                    break;
+                case 4:
+                    data = this.formatDataForWorldMap(policy4);
+                    break;
+                case 5:
+                    data = this.formatDataForWorldMap(policy5);
+                    break;
             }
 
             this.worldMapData = data;
@@ -375,8 +328,8 @@ export default {
         },
         formatDataForWorldMap(jsonData) {
             return jsonData.map(item => ({
-            name: item.country,
-            value: parseFloat(item.net_approval)
+                name: item.country,
+                value: parseFloat(item.net_approval)
             }));
         },
 
@@ -472,7 +425,7 @@ export default {
                 // 默认调暗
                 const baseLineStyle = { opacity: 5, width: 5 };
                 // 鼠标 / programmatic 高光时恢复
-                const emphasis = { focus: 'series', lineStyle: { opacity: 10, width: 30,color: 'red' } };
+                const emphasis = { focus: 'series', lineStyle: { opacity: 10, width: 30, color: 'red' } };
                 return {
                     ...serie,
                     lineStyle: { ...baseLineStyle, ...(serie.lineStyle || {}) },
@@ -545,7 +498,7 @@ export default {
                         type: 'line',
                         data: this.avgNat,
                         smooth: true,
-                        lineStyle: { width: 2, type: 'dashed' ,color:'blue'}
+                        lineStyle: { width: 2, type: 'dashed', color: 'blue' }
                     }
                 ]
             });
@@ -577,97 +530,97 @@ export default {
                 });
             });
 
-  // —— 3. 点击图例时，只高光选中系列的线，其余系列调暗 —— 
-  const names = allSeries.map(s => s.name);
-  countryChart.on('legendselectchanged', ({ name: selectedName }) => {
-    names.forEach(name => {
-      countryChart.dispatchAction({
-        type: name === selectedName ? 'highlight' : 'downplay',
-        seriesName: name
-      });
-    });
-  });
+            // —— 3. 点击图例时，只高光选中系列的线，其余系列调暗 —— 
+            const names = allSeries.map(s => s.name);
+            countryChart.on('legendselectchanged', ({ name: selectedName }) => {
+                names.forEach(name => {
+                    countryChart.dispatchAction({
+                        type: name === selectedName ? 'highlight' : 'downplay',
+                        seriesName: name
+                    });
+                });
+            });
 
-  this.countryChart = countryChart;
-
-
-  window.addEventListener('resize', avgChart.resize);
-  this.avgChart = avgChart;
-},
-    drawWorldMapChart() {
-        const chartDom = this.$refs.worldMapChart;
-        if (!chartDom) return;
-
-        const myChart = echarts.init(chartDom);
-        const selectedIssueLabel = this.proposalLabels[this.selectedIssue] || `提案 ${this.selectedIssue}`; // 后备文本
-        const option = {
-            title: {
-            text: `特朗普提案 ${selectedIssueLabel} - 各国净支持率分布`,
-            left: 'center',
-            textStyle: { color: '#fff' }
-            },
-            tooltip: {
-            trigger: 'item',
-            formatter: params => {
-                return `${params.name}<br/>净支持率: ${params.value}`;
-            }
-            },
-            visualMap: {
-  type: 'continuous',
-  min: -89,
-  max:  41,
-  calculable: true,
-  orient: 'horizontal',
-  bottom: 20,
-  left: 'center',
-  text: ['高支持率','低支持率'],
-  inRange: {
-    color: [
-      '#ffffff',  // min ≈ -89
-      '#fee6ce',  // ≈ -65（20%分位）
-      '#fdd0a2',  // ≈ -47（40%分位）
-      '#fdae6b',  // ≈ -30（60%分位）
-      '#fd8d3c',  // ≈ -12（80%分位）
-      '#ef3b2c',  // 中高端
-      '#cb181d',  // 更高
-      '#a50f15'   // max = +41
-    ]
-  }
-},
+            this.countryChart = countryChart;
 
 
-  
+            window.addEventListener('resize', avgChart.resize);
+            this.avgChart = avgChart;
+        },
+        drawWorldMapChart() {
+            const chartDom = this.$refs.worldMapChart;
+            if (!chartDom) return;
 
-            mapType: 'world',
-            roam: true,
-            itemStyle: {
-                areaColor: '#2a333d',
-                borderColor: '#111'
-            },
-            emphasis: {
-                itemStyle: {
-                    areaColor: '#2a333d'
-                }
-            },
-            series: [
-                {
-                    name: '净支持率',
-                    type: 'map',
-                    mapType: 'world',
-                    data: this.worldMapData,
-                    showLegendSymbol: true,
-                    label: {
-                    show: false
+            const myChart = echarts.init(chartDom);
+            const selectedIssueLabel = this.proposalLabels[this.selectedIssue] || `提案 ${this.selectedIssue}`; // 后备文本
+            const option = {
+                title: {
+                    text: `特朗普提案 ${selectedIssueLabel} - 各国净支持率分布`,
+                    left: 'center',
+                    textStyle: { color: '#fff' }
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: params => {
+                        return `${params.name}<br/>净支持率: ${params.value}`;
                     }
-                }
-            ]
-        };
+                },
+                visualMap: {
+                    type: 'continuous',
+                    min: -89,
+                    max: 41,
+                    calculable: true,
+                    orient: 'horizontal',
+                    bottom: 20,
+                    left: 'center',
+                    text: ['高支持率', '低支持率'],
+                    inRange: {
+                        color: [
+                            '#ffffff',  // min ≈ -89
+                            '#fee6ce',  // ≈ -65（20%分位）
+                            '#fdd0a2',  // ≈ -47（40%分位）
+                            '#fdae6b',  // ≈ -30（60%分位）
+                            '#fd8d3c',  // ≈ -12（80%分位）
+                            '#ef3b2c',  // 中高端
+                            '#cb181d',  // 更高
+                            '#a50f15'   // max = +41
+                        ]
+                    }
+                },
 
-        myChart.setOption(option);
-        window.addEventListener('resize', () => myChart.resize());
 
-        // 保存实例用于销毁
-        this.worldMapChartInstance = myChart;
+
+
+                mapType: 'world',
+                roam: true,
+                itemStyle: {
+                    areaColor: '#2a333d',
+                    borderColor: '#111'
+                },
+                emphasis: {
+                    itemStyle: {
+                        areaColor: '#2a333d'
+                    }
+                },
+                series: [
+                    {
+                        name: '净支持率',
+                        type: 'map',
+                        mapType: 'world',
+                        data: this.worldMapData,
+                        showLegendSymbol: true,
+                        label: {
+                            show: false
+                        }
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+            window.addEventListener('resize', () => myChart.resize());
+
+            // 保存实例用于销毁
+            this.worldMapChartInstance = myChart;
         }
     },
     mounted() {
@@ -678,7 +631,7 @@ export default {
         this.drawPolicyCategoryChart();
         this.drawCharts();
         this.loadIssueData(this.selectedIssue);
-    
+
     },
     beforeDestroy() {
         // 清理 ECharts 实例和事件监听器
@@ -847,6 +800,7 @@ small.number {
 .warning {
     color: red;
 }
+
 /* 新增特朗普小像样式 */
 
 .trump-fixed-container {
@@ -854,24 +808,29 @@ small.number {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 33.333333%; /* 保持col-md-4的宽度 */
+    width: 33.333333%;
+    /* 保持col-md-4的宽度 */
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    pointer-events: none; /* 允许点击穿透到下方内容 */
+    pointer-events: none;
+    /* 允许点击穿透到下方内容 */
 }
 
 .trump-portrait-container {
-    pointer-events: auto; /* 恢复小像区域的点击事件 */
+    pointer-events: auto;
+    /* 恢复小像区域的点击事件 */
     max-width: 90%;
     padding: 20px;
 }
 
 .scrollable-content {
-    margin-left: 33.333333%; /* 为固定的小像留出空间 */
-    width: 66.666667%; /* col-md-8的宽度 */
+    margin-left: 33.333333%;
+    /* 为固定的小像留出空间 */
+    width: 66.666667%;
+    /* col-md-8的宽度 */
 }
 
 /* 响应式调整 - 
@@ -884,7 +843,7 @@ small.number {
         height: auto;
         transform: none;
     }
-    
+
     .scrollable-content {
         margin-left: 0;
         width: 100%;
@@ -919,12 +878,13 @@ small.number {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     z-index: 100;
 }
+
 .word-cloud-container {
-  width: 100%;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 </style>
