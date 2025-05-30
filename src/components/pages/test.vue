@@ -17,11 +17,11 @@
     <main class="dashboard-main">
       <aside class="sidebar left-sidebar" :style="getColumnStyle('left')">
         <div class="chart-card">
-          <div class="card-title" @click="toggleExpand('left')">各国支持度趋势</div>
+          <div class="card-title" @click="toggleExpand('left')">各国对美国与美国总统信任度趋势</div>
           <div ref="countryCharts" class="echart-container"></div>
         </div>
         <div class="chart-card">
-          <div class="card-title" @click="toggleExpand('left')">平均支持度趋势</div>
+          <div class="card-title" @click="toggleExpand('left')">国际对美国与美国总统平均信任度趋势</div>
           <div ref="avgChart" class="echart-container"></div>
         </div>
         <div class="chart-card">
@@ -32,14 +32,38 @@
 
       <section class="main-content" :style="getColumnStyle('main')">
         <div class="top-stats">
-          <div class="stat-item">
-            <div class="stat-value">67 <span class="stat-change down">-2%</span></div>
-            <div class="stat-label">当前预警数(起)</div>
+          <!-- <div class="stat-item"> -->
+          <!-- <div class="stat-value">这项特朗普支持率研究仪表盘，从国际反响、国内选情、政策焦点到媒体热度，为您全方位解析了其支持度的现状、构成与动态趋势<span class="stat-change down"></span></div> -->
+          <div class="stat-label" style="text-align: left; line-height: 1.3;">
+            <p>
+              <strong>仪表盘总结：</strong>这项特朗普支持率研究仪表盘，从国际反响、国内选情到政策焦点媒体舆情，为用户全方位解析了其支持度的现状、构成与动态趋势。
+            </p>
+            <strong>主要分析维度细分：</strong>
+            <ul style="list-style-position: outside; padding-left: 20px;">
+              
+              <li style="margin-bottom: 0.75em;">
+                <strong>国际关系动态</strong><br>
+                <small><em>“各国对美国与美国总统信任度趋势”、“提案国家支持率分布”、“国际对美国与美国总统平均信任度趋势”</em></small>
+              </li>
+              <li style="margin-bottom: 0.75em;">
+                <strong>国内选举模拟</strong><br>
+                <small><em>“2024年美国总统选举结果”、“哈里斯与特朗普在各州的得票率比较”、“哈里斯与特朗普在各州赢得的选举人票数”</em></small>
+              </li>
+              <li style="margin-bottom: 0.75em;">
+                <strong>政策画像构建</strong><br>
+                <small><em>“特朗普曾政策提案类型统计”</em></small>
+              </li>
+              <li style="margin-bottom: 0.75em;">
+                <strong>媒体舆情</strong><br>
+                <small><em>“特朗普相关关键词词云图”</em></small>
+              </li>
+            </ul>
           </div>
-          <div class="stat-item">
-            <div class="stat-value">1.4 <span class="stat-unit">T</span> <span class="stat-change up">+1.20 KM/H</span>
+          <!-- </div> -->
+          <!-- <div class="stat-item">
+            <div class="stat-value">26237 <span class="stat-unit">T</span> <span class="stat-change up"></span>
             </div>
-            <div class="stat-label">区域路况指数</div>
+            <div class="stat-label">twitter number(2016-2020)</div>
           </div>
           <div class="stat-item">
             <div class="stat-value">99 <span class="stat-change down">-1%</span></div>
@@ -48,7 +72,7 @@
           <div class="stat-item">
             <div class="stat-value">7421 <span class="stat-change down">-7%</span></div>
             <div class="stat-label">当前报警数(起)</div>
-          </div>
+          </div> -->
         </div>
         <div class="map-container">
           <div class="map-controls" @click="toggleExpand('main')">
@@ -76,7 +100,7 @@
           </div>
           <div ref="electionResultMap" style="width:100%; height:600px;"></div>
         </div>
-        <div class="bottom-summary">
+        <!-- <div class="bottom-summary">
           <div class="summary-title">今日实时收费</div>
           <div class="summary-items">
             <div class="summary-item"><span>大同北</span><span>XX元</span></div>
@@ -98,7 +122,7 @@
               <span>今日营收</span>
             </div>
           </div>
-        </div>
+        </div> -->
       </section>
 
       <aside class="sidebar right-sidebar" :style="getColumnStyle('right')">
@@ -107,7 +131,7 @@
           <div ref="policyCategoryChart" class="echart-container"></div>
         </div>
         <div class="chart-card word-cloud-card">
-          <div class="card-title" @click="toggleExpand('right')">关键词词云图</div>
+          <div class="card-title" @click="toggleExpand('right')">特朗普推特关键词词云图</div>
           <wordcloud :data="defaultWords" nameKey="name" valueKey="value" :color="myColors" :showTooltip="true"
             :wordClick="wordClickHandler" class="wordcloud-container">
           </wordcloud>
@@ -275,49 +299,73 @@ export default {
       console.log("Selected area:", item);
     },
     processData() {
-        // ① 获取年份数组 (和原来一样)
-        this.years = pres.map(d => d.year);
+      // ① 获取年份数组 (和原来一样)
+      this.years = pres.map(d => d.year);
 
-        // ② 获取 *所有可能* 的国家列表 (和原来一样)
-        const potentialCountries = Object.keys(pres[0])
-            .filter(k => k !== 'year' && k !== 'avg');
+      // // ② 获取 *所有可能* 的国家列表 (和原来一样)
+      // const potentialCountries = Object.keys(pres[0])
+      //     .filter(k => k !== 'year' && k !== 'avg');
 
-        // ③ [新增] 筛选国家 - 只保留全年都有数据的
-        this.countries = potentialCountries.filter(country => {
-            // 检查 pres 数据集中的每一行 (每一年)
-            const presComplete = pres.every(yearData => 
-                yearData[country] !== undefined && yearData[country] !== null && yearData[country] !== ''
-            );
-            // 检查 us 数据集中的每一行 (每一年)
-            const usComplete = us.every(yearData => 
-                yearData[country] !== undefined && yearData[country] !== null && yearData[country] !== ''
-            );
-            
-            // 只有当一个国家在 *两个* 数据集中都全年有数据时，才返回 true
-            return presComplete && usComplete;
-        });
+      // // ③ [新增] 筛选国家 - 只保留全年都有数据的
+      // this.countries = potentialCountries.filter(country => {
+      //     // 检查 pres 数据集中的每一行 (每一年)
+      //     const presComplete = pres.every(yearData => 
+      //         yearData[country] !== undefined && yearData[country] !== null && yearData[country] !== ''
+      //     );
+      //     // 检查 us 数据集中的每一行 (每一年)
+      //     const usComplete = us.every(yearData => 
+      //         yearData[country] !== undefined && yearData[country] !== null && yearData[country] !== ''
+      //     );
 
-        // 打印筛选后的国家列表（可选，用于调试）
-        console.log("将用于绘图的国家 (Filtered):", this.countries);
+      //     // 只有当一个国家在 *两个* 数据集中都全年有数据时，才返回 true
+      //     return presComplete || usComplete;
+      // });
+      // ② 获取 *所有可能* 的国家列表 (和原来一样)
+      const potentialCountries = Object.keys(pres[0])
+        .filter(k => k !== 'year' && k !== 'avg');
 
-        // ④ [修改] 使用 *筛选后* 的 this.countries 来构建 series
-        this.seriesPres = this.countries.map(country => ({
-            name: country,
-            type: 'line',
-            data: pres.map(d => d[country] !== '' ? +d[country] : null)
-        }));
-        
-        // ④ [修改] 使用 *筛选后* 的 this.countries 来构建 series
-        this.seriesNat = this.countries.map(country => ({
-            // 注意：这里我们为 '国家' 系列添加后缀，以便在图例中区分
-            name: country + '（国家）', 
-            type: 'line',
-            data: us.map(d => d[country] !== '' ? +d[country] : null)
-        }));
+      // ③ 筛选国家 - 只保留在 pres 或 us 数据集中至少有6个有效数据点的国家
+      this.countries = potentialCountries.filter(country => {
+        // 检查 pres 数据集中该国家有多少个有效数据点
+        const presValidCount = pres.filter(yearData =>
+          yearData[country] !== undefined &&
+          yearData[country] !== null &&
+          yearData[country] !== ''
+        ).length;
 
-        // ⑤ 全体平均数据保持不变 (和原来一样)
-        this.avgPres = pres.map(d => +d.avg);
-        this.avgNat = us.map(d => +d.avg);
+        // 检查 us 数据集中该国家有多少个有效数据点
+        const usValidCount = us.filter(yearData =>
+          yearData[country] !== undefined &&
+          yearData[country] !== null &&
+          yearData[country] !== ''
+        ).length;
+
+        // 如果一个国家在 pres 数据集或 us 数据集中至少有6个有效数据点 (即6个或更多)，则保留
+        // "6个以上" 通常理解为 ">= 6"。如果您严格需要 "多于6个" (即7个或更多), 请将下方的 >= 改为 >
+        return presValidCount >= 6 || usValidCount >= 6;
+      });
+
+      // 打印筛选后的国家列表（可选，用于调试）
+      console.log("将用于绘图的国家 (Filtered):", this.countries);
+
+      // ④ [修改] 使用 *筛选后* 的 this.countries 来构建 series
+      this.seriesPres = this.countries.map(country => ({
+        name: country + '(pres)',
+        type: 'line',
+        data: pres.map(d => d[country] !== '' ? +d[country] : null)
+      }));
+
+      // ④ [修改] 使用 *筛选后* 的 this.countries 来构建 series
+      this.seriesNat = this.countries.map(country => ({
+        // 注意：这里我们为 '国家' 系列添加后缀，以便在图例中区分
+        name: country + '（us）',
+        type: 'line',
+        data: us.map(d => d[country] !== '' ? +d[country] : null)
+      }));
+
+      // ⑤ 全体平均数据保持不变 (和原来一样)
+      this.avgPres = pres.map(d => +d.avg);
+      this.avgNat = us.map(d => +d.avg);
     },
     processPolicyCategoryData() {
       const categoryCounts = {};
@@ -386,7 +434,7 @@ export default {
       this.countryChart = echarts.init(countryChartDom);
       const allSeries = [
         ...this.seriesPres.map(s => ({ ...s, smooth: true, lineStyle: { width: 1, opacity: 0.7 } })), // 调整线条样式
-        ...this.seriesNat.map(s => ({ ...s, smooth: true, lineStyle: { width: 1, opacity: 0.7, type: 'dashed' }, name: s.name + '（国家）' }))
+        ...this.seriesNat.map(s => ({ ...s, smooth: true, lineStyle: { width: 1, opacity: 0.7, type: 'dashed' }, name: s.name }))
       ];
       // [新增] 创建一个所有图例都未选中的初始状态对象
       const allNames = allSeries.map(s => s.name);
